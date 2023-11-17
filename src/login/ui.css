@@ -1,0 +1,12 @@
+.vbox{
+	-fx-background-color:linear-gradient(to top right,#84FFC9,#AAB2FF);
+	-fx-border-radius:transparent;
+	
+}
+#addbtn,
+#updtbtn,
+#rembtn{
+	-fx-border-radius:100px;
+	-fx-background-color:transparent;
+
+}
