@@ -33,7 +33,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
  *
  * @author amir
  */
-public class FXMLDocumentController implements Initializable {
+public class LoginpanelController implements Initializable {
 
 	@FXML
 	private AnchorPane pane_login;
@@ -110,10 +110,10 @@ public class FXMLDocumentController implements Initializable {
 
 
 			}else if(type.getValue().toString()=="User" /*&& rs.next()*/){ 
-				JOptionPane.showMessageDialog(null, "Username And Password is Corect");
+				JOptionPane.showMessageDialog(null, "Username And Password is Correct");
 
 				btn_login.getScene().getWindow().hide();
-				Parent root = FXMLLoader.load(getClass().getResource("CPanel.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("Userpanel.fxml"));
 				Stage mainStage2 = new Stage();
 				Scene scene = new Scene(root);
 				mainStage2.setScene(scene);

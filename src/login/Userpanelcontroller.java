@@ -1,5 +1,5 @@
  package login;
 
 
-public class CPanelController {    
+public class Userpanelcontroller {    
 }
