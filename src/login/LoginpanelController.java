@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,15 +22,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
-
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 
 /**
  *
@@ -101,7 +99,7 @@ public class LoginpanelController implements Initializable {
 
 				JOptionPane.showMessageDialog(null, "welcome Admin");
 				btn_login.getScene().getWindow().hide();
-				Parent root = FXMLLoader.load(getClass().getResource("APanel.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("Adminpanel.fxml"));
 				Stage mainStage = new Stage();
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("ui.css").toExternalForm());
@@ -129,7 +127,7 @@ public class LoginpanelController implements Initializable {
 //	}
 	
 	 	@FXML
-	    private void exit(ActionEvent event) {
+	    private void exit() {
 	        // Get the source of the event, which is the button
 	        System.exit(0);
 	    }

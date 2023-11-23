@@ -23,7 +23,7 @@ public class Login extends Application {
           Scene scene = new Scene(root);   
 //        stage.setScene(scene);
 //        stage.show();
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+          primaryStage.initStyle(StageStyle.UNDECORATED);
 
         // Set the scene to the stage
         primaryStage.setScene(scene);
