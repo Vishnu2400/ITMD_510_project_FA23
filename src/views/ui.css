@@ -1,6 +1,7 @@
 .card1,
 .card2,
 .card3,
+.selectmovie_card,
 .vbox{
 	-fx-background-color:linear-gradient(to top right,#84FFC9,#AAB2FF);
 	-fx-border-radius:transparent;
@@ -16,4 +17,46 @@
 
 .lgntppane{
 	-fx-background-color: #AAB2FF;
+}
+
+.user_bookingpane{
+	
+	-fx-background-color: #c5f7fb;
+	-fx-background-radius:8px;
+	
+	
+}
+
+.user_movie{
+	
+	-fx-background-color: #c5f7fb;
+	-fx-background-radius:8px;
+	
+	
+}
+  /*dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0)*/
+
+
+.movie_info{
+	-fx-border-color:#ae2d3c;
+	-fx-border-radius: 10px,0px,0px,10px;
+	
+}
+
+.label_info{
+	-fx-border-color:#ae2d3c;
+	-fx-border-radius:0 5px,0px,0px,;
+	-fx-border-width:.8px;
+	-fx-padding:.8px;
+	-fx-font-size:14px;
+}
+.movie_table{
+	-fx-border-color:transparent;
+	
+}
+
+.movie_image{
+	-fx-background-color:white;
+	-fx-border-radius:transparent;
+	
 }
