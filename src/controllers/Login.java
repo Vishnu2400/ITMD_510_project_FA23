@@ -1,4 +1,4 @@
- package login;
+ package controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ public class Login extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginPanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/LoginPanel.fxml"));
         
           Scene scene = new Scene(root);   
 //        stage.setScene(scene);

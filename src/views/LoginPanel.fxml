@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="931.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginpanelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="931.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginpanelController">
    <children>
       <HBox layoutX="497.0" layoutY="42.0" prefHeight="78.0" prefWidth="433.0" style="-fx-border-color: #AAB2FF; -fx-border-width: 2;" AnchorPane.leftAnchor="497.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="42.0">
          <children>
@@ -37,7 +37,7 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="pane_login" layoutX="496.0" layoutY="134.0" prefHeight="301.0" prefWidth="419.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="16.0">
+      <AnchorPane fx:id="pane_login" layoutX="496.0" layoutY="134.0" prefHeight="301.0" prefWidth="419.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="16.0">
          <children>
             <TextField fx:id="txt_username" layoutX="45.0" layoutY="81.0" prefHeight="40.0" prefWidth="361.0" promptText="Enter UserName" style="-fx-border-width: 0px 0px 1px 0px; -fx-background-color: transparent; -fx-border-color: #AAB2FF;">
                <font>
@@ -60,13 +60,13 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane_signup" layoutX="500.0" layoutY="123.0" prefHeight="288.0" prefWidth="431.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="499.0" AnchorPane.rightAnchor="1.0">
+      <AnchorPane fx:id="pane_signup" layoutX="500.0" layoutY="123.0" prefHeight="323.0" prefWidth="431.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="499.0" AnchorPane.rightAnchor="1.0">
          <children>
-            <TextField fx:id="txt_username_up" layoutX="185.0" layoutY="75.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Username" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0px 0px 1px 0px;" />
-            <TextField fx:id="txt_password_up" layoutX="185.0" layoutY="114.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Password" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0 0 1 0px;" />
-            <TextField fx:id="email_up" layoutX="185.0" layoutY="155.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Email" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0 0 1 0px;" />
+            <TextField fx:id="txt_username_up" layoutX="185.0" layoutY="112.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Username" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0px 0px 1px 0px;" />
+            <TextField fx:id="txt_password_up" layoutX="185.0" layoutY="151.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Password" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0 0 1 0px;" />
+            <TextField fx:id="email_up" layoutX="185.0" layoutY="191.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Email" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0 0 1 0px;" />
             <ComboBox fx:id="type_up" layoutX="185.0" layoutY="24.0" prefHeight="30.0" prefWidth="218.0" promptText="Choose Type" />
-            <Button layoutX="38.0" layoutY="209.0" mnemonicParsing="false" onAction="#add_users" prefHeight="48.0" prefWidth="368.0" style="-fx-background-color: #84FFC9;" text="SignUp" textFill="WHITE">
+            <Button layoutX="38.0" layoutY="240.0" mnemonicParsing="false" onAction="#add_users" prefHeight="48.0" prefWidth="368.0" style="-fx-background-color: #84FFC9;" text="SignUp" textFill="WHITE">
                <font>
                   <Font name="Times New Roman Bold" size="27.0" />
                </font>
@@ -79,6 +79,7 @@
                      </light>
                   </Lighting>
                </effect></FontAwesomeIcon>
+            <TextField fx:id="txt_name_up1" layoutX="185.0" layoutY="74.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your name" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0px 0px 1px 0px;" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="430.0" fitWidth="431.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="23.0">

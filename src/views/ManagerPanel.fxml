@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerpanelController">
+   <children>
+      <AnchorPane prefHeight="25.0" prefWidth="1200.0" AnchorPane.bottomAnchor="730.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIcon glyphName="TICKET" layoutX="2.0" layoutY="22.0" size="25PX" />
+            <Label layoutX="35.0" layoutY="3.0" text="Cinimaxx">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="664.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" style="-fx-cursor: hand; -fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <FontAwesomeIcon glyphName="CLOSE" wrappingWidth="10.428571701049805" />
+               </graphic>
+            </Button>
+            <Button layoutX="712.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #fff; -fx-cursor: hand;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <FontAwesomeIcon glyphName="MINUS" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <VBox fx:id="vboxmenu" layoutY="26.0" prefHeight="728.0" prefWidth="316.0" styleClass="vbox" stylesheets="@ui.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="884.0" AnchorPane.topAnchor="26.0">
+         <children>
+            <FontAwesomeIcon fontSmoothingType="LCD" glyphName="USER" size="90px" strokeLineCap="BUTT" strokeLineJoin="ROUND" wrappingWidth="65.4285717010498">
+               <fill>
+                  <LinearGradient endY="1.0" startY="0.4454976303317536">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5" green="0.4616512358188629" blue="0.33564814925193787" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <VBox.margin>
+                  <Insets left="120.0" right="120.0" top="50.0" />
+               </VBox.margin>
+               <stroke>
+                  <LinearGradient endX="0.4597156398104265" endY="0.16113744075829375" startX="0.9004739336492891" startY="0.8341232227488151">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.1315789520740509" green="0.12975145876407623" blue="0.12853313982486725" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </FontAwesomeIcon>
+            <Label prefHeight="22.0" prefWidth="184.0" text="Manager Portal" wrapText="true">
+               <VBox.margin>
+                  <Insets left="70.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font name="Lucida Calligraphy Italic" size="14.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="0.4786729857819905" proportional="false" startX="0.5118483412322276" startY="0.43127962085308047">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.1315789520740509" green="0.12975145876407623" blue="0.12853313982486725" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <AnchorPane prefHeight="366.0" prefWidth="316.0">
+               <children>
+                  <Button layoutX="65.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleDashboardButton" prefHeight="30.0" prefWidth="186.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="Dash Board" textAlignment="CENTER" textFill="#f58428" wrapText="true" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="36.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon glyphName="DASHBOARD" size="15PX" />
+                     </graphic>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </Button>
+                  <Button layoutX="65.0" layoutY="92.0" mnemonicParsing="false" onAction="#handleAddAdminButton" prefHeight="30.0" prefWidth="186.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="Add Admin" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.leftAnchor="65.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon glyphName="USER_PLUS" size="15PX" />
+                     </graphic>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BOTTOM_LEFT" layoutX="102.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="SignOut" textFill="#f58428">
+                     <padding>
+                        <Insets bottom="4.0" left="20.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIcon glyphName="SIGN_OUT" selectionStart="0" size="15PX" textAlignment="JUSTIFY" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="scrollImgpane" layoutX="369.0" layoutY="260.0" prefHeight="376.0" prefWidth="821.0" style="-fx-background-color: #fff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-radius: 8px;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="260.0">
+         <children>
+            <Button layoutX="-1.0" layoutY="156.0" mnemonicParsing="false" onAction="#back" prefHeight="73.0" prefWidth="25.0" style="-fx-background-color: transparent;" text="&lt;" AnchorPane.bottomAnchor="147.0" AnchorPane.topAnchor="156.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="778.0" layoutY="157.0" mnemonicParsing="false" onAction="#next" prefHeight="79.0" prefWidth="56.0" style="-fx-background-color: transparent;" text="&gt;" AnchorPane.bottomAnchor="140.0" AnchorPane.topAnchor="157.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="img1" fitHeight="376.0" fitWidth="821.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+            <ImageView fx:id="img2" fitHeight="376.0" fitWidth="821.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="img3" fitHeight="393.0" fitWidth="846.0" layoutX="-25.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cashdashboardpane" layoutX="353.0" layoutY="45.0" prefHeight="200.0" prefWidth="839.0">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0)000000;" styleClass="card2" stylesheets="@ui.css" />
+            <AnchorPane layoutX="574.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card3" stylesheets="@ui.css" />
+            <AnchorPane layoutX="294.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card1" stylesheets="@ui.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="addAdminpane" layoutX="357.0" layoutY="45.0" prefHeight="713.0" prefWidth="846.0" visible="false">
+         <children>
+            <TableView layoutX="24.0" layoutY="11.0" prefHeight="445.0" prefWidth="795.0">
+               <columns>
+                  <TableColumn prefWidth="152.0" text="Admin username" />
+                  <TableColumn prefWidth="388.0" text="Email id" />
+                  <TableColumn prefWidth="254.0" text="Password" />
+               </columns>
+            </TableView>
+            <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" text="Add Admin">
+               <graphic>
+                  <FontAwesomeIcon glyphName="USER_PLUS" />
+               </graphic>
+            </Button>
+            <Button layoutX="517.0" layoutY="507.0" mnemonicParsing="false" text="Delete Admin">
+               <graphic>
+                  <FontAwesomeIcon glyphName="USER_TIMES" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
