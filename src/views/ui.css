@@ -45,7 +45,7 @@
 
 .label_info{
 	-fx-border-color:#ae2d3c;
-	-fx-border-radius:0 5px,0px,0px,;
+	-fx-border-radius:0 5px,0px,0px;
 	-fx-border-width:.8px;
 	-fx-padding:.8px;
 	-fx-font-size:14px;

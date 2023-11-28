@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,6 +25,8 @@ import javafx.scene.layout.AnchorPane;
 import models.DBmodels;
 import models.DBmodels.Movie;
 public class Userpanelcontroller  {    
+
+	private static final java.sql.Timestamp Timestamp = null;
 
 	@FXML
 	private AnchorPane Mybookingpane;
@@ -63,6 +66,11 @@ public class Userpanelcontroller  {
 
 	@FXML
 	private Label mybookings_genre;
+	
+	@FXML
+	private Label user_name;
+	
+	
 
 	@FXML
 	private ImageView mybookings_img;
@@ -75,9 +83,6 @@ public class Userpanelcontroller  {
 
 	@FXML
 	private Label mybookings_title;
-
-	@FXML
-	private Button purchase_buybtn;
 
 	@FXML
 	private Button purchase_clearbtn;
@@ -117,6 +122,10 @@ public class Userpanelcontroller  {
 
 	@FXML
 	private AnchorPane selectmoviebuttonpane;
+	
+	private int movieId_fromTab;
+	
+	private String movie_title_fromtab;
 
 	DBmodels dbOperations = new DBmodels();
 
@@ -161,6 +170,8 @@ public class Userpanelcontroller  {
 	void initialize() {
 
 		showSpinnerValue();
+
+
 //		spinnervalue();
 		
 		
@@ -171,6 +182,8 @@ public class Userpanelcontroller  {
 	public void select_movies(MouseEvent event) {
 		Movie movie = bookmovie_table.getSelectionModel().getSelectedItem();
 		int num = bookmovie_table.getSelectionModel().getSelectedIndex();
+		movieId_fromTab =movie.getId();
+		System.out.println(movieId_fromTab);
 
 		if((num - 1) < -1) {
 			return;
@@ -178,6 +191,7 @@ public class Userpanelcontroller  {
 		selectmovie_title.setText(movie.getTitle());
 		selectmovie_date.setText(movie.getPublishDate().toString());
 		selectmovie_genre.setText(movie.getGenre().toString());
+		movie_title_fromtab= movie.getTitle();
 
 	}
 
@@ -213,11 +227,13 @@ public class Userpanelcontroller  {
 
 	public SpinnerValueFactory<Integer> spinner1;
 	public SpinnerValueFactory<Integer> spinner2;
-	public float price1;
-	public float price2;
-	public float total;
-	public int q1;
-	public int q2;
+	public double price1;
+	public double price2;
+	public double total;
+	public double q1;
+	public double q2;
+
+	private String username;
 
 	public void showSpinnerValue() {
 		spinner1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
@@ -240,7 +256,29 @@ public class Userpanelcontroller  {
 		
 		
 	}
+	
+	
+	
 
+	
+	   @FXML
+	    void purchase_buybtn() {
+		   
+		   long currentTimeMillis = System.currentTimeMillis();
+		   Timestamp bookedtime = new Timestamp(currentTimeMillis);
+		   
+		   dbOperations.Bookticket(username, movieId_fromTab, movie_title_fromtab, bookedtime, q1,q2,total);
+
+	    }
+	   
+	   public void setUsername(String username) {
+	        this.username = username;
+	        user_name.setText(username); 
+	       
+	    }
+	   
+
+      
 
 
 }

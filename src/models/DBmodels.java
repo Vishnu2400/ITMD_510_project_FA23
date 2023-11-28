@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import controllers.Userpanelcontroller;
 
 import javax.swing.JOptionPane;
 
@@ -76,6 +78,27 @@ public class DBmodels {
         }
     }
     
+//    public ArrayList<String> fetchuser(String username) {
+//        ArrayList<String> userdata = new ArrayList<String>();
+//            conn = mysqlconnect.connectdb();
+//            String sql = "SELECT * FROM moviebooking_user_table WHERE U_username = ? ";
+//            try {
+//                pst = conn.prepareStatement(sql);
+//                pst.setString(1, username);
+//
+//                rs = pst.executeQuery();
+//                userdata.add(rs.getString("U_name"));
+//                userdata.add(rs.getString("U_email"));
+//     
+//            } catch (SQLException e) {
+//                JOptionPane.showMessageDialog(null, e);
+//               
+//            } finally {
+//                closeResources();
+//            }
+//            return userdata;
+//        }
+    
     public List<Movie> getMovies() {
         conn = mysqlconnect.connectdb();
         String sql = "SELECT * FROM moviebooking_movie_table";
@@ -117,6 +140,30 @@ public class DBmodels {
             closeResources();
         }
     }
+    
+    public void Bookticket(String username, int movie_id, String movie_title, Timestamp bookedtime, double no_premium_tickets, double no_of_normal_tickets, double total_cost) {
+        String sql = "INSERT INTO moviebooking_booking_table(U_username, Movie_id, Movie_title, booking_timestamp, booking_no_premium_tickets, booking_no_normal_tickets, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        conn = mysqlconnect.connectdb();
+
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);  // Set the username
+            pst.setInt(2, movie_id);  // Set the movie_id
+            pst.setString(3, movie_title);  // Set the movie_title
+            pst.setTimestamp(4, bookedtime);  // Set the bookedtime
+            pst.setDouble(5, no_premium_tickets);  // Set the no_premium_tickets
+            pst.setDouble(6, no_of_normal_tickets);  // Set the no_of_normal_tickets
+            pst.setDouble(7, total_cost);  // Set the total_cost
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Booked movie!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
 
     private void closeResources() {
         try {
@@ -184,4 +231,5 @@ public class DBmodels {
 		}
         
     }
+    
 }

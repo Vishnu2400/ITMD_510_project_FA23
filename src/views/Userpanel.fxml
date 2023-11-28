@@ -85,6 +85,11 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
+                  <Label fx:id="user_name" text="Name">
+                     <VBox.margin>
+                        <Insets left="150.0" top="25.0" />
+                     </VBox.margin>
+                  </Label>
                   <AnchorPane prefHeight="350.0" prefWidth="291.0">
                      <children>
                         <Button fx:id="mybookingbutton" layoutX="67.2" layoutY="100.0" mnemonicParsing="false" onAction="#mybookings" prefHeight="20.0" prefWidth="182.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="My Bookings" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="100.0">
@@ -172,7 +177,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="83.0" layoutY="144.0" mnemonicParsing="false" onAction="#selectmovie_btn" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: nand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" text="Select Movie" textFill="#f58428">
+                  <Button layoutX="84.0" layoutY="144.0" mnemonicParsing="false" onAction="#selectmovie_btn" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: nand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" text="Select Movie" textFill="#f58428">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -241,7 +246,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="purchase_buybtn" layoutX="315.0" layoutY="291.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: nand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" text="Buy" textFill="#f58428">
+                  <Button layoutX="315.0" layoutY="291.0" mnemonicParsing="false" onAction="#purchase_buybtn" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: nand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" text="Buy" textFill="#f58428">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
