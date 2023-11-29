@@ -108,7 +108,6 @@ public class LoginpanelController implements Initializable {
 			mainStage.setScene(scene);
 			mainStage.show();
 			}catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			
@@ -119,8 +118,10 @@ public class LoginpanelController implements Initializable {
 				JOptionPane.showMessageDialog(null, "Username And Password is Correct");
 
 			btn_login.getScene().getWindow().hide();
-			Parent root1 = FXMLLoader.load(getClass().getResource("/views/Userpanel.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Userpanel.fxml"));
+	        Parent root1 = loader.load();
 			Stage mainStage2 = new Stage();
+			mainStage2.initStyle(StageStyle.UNDECORATED);
 			Scene scene1 = new Scene(root1);
 			mainStage2.setScene(scene1);
 			mainStage2.show();
@@ -133,6 +134,7 @@ public class LoginpanelController implements Initializable {
 			btn_login.getScene().getWindow().hide();
 			Parent root11 = FXMLLoader.load(getClass().getResource("/views/Managerpanel.fxml"));
 			Stage mainStage3 = new Stage();
+			mainStage3.initStyle(StageStyle.UNDECORATED);
 			Scene scene11 = new Scene(root11);
 			mainStage3.setScene(scene11);
 			mainStage3.show();

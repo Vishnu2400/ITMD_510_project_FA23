@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -85,7 +86,7 @@
             </Label>
             <AnchorPane prefHeight="366.0" prefWidth="316.0">
                <children>
-                  <Button layoutX="65.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleUpdatemovie" prefHeight="30.0" prefWidth="186.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-cursor: hand; -fx-graphic-text-gap: 10px;" text="Customer bookings" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.bottomAnchor="158.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0">
+                  <Button layoutX="65.0" layoutY="178.0" mnemonicParsing="false" onAction="#handlecustomerbtn" prefHeight="30.0" prefWidth="186.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-cursor: hand; -fx-graphic-text-gap: 10px;" text="Customer bookings" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.bottomAnchor="158.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -138,38 +139,37 @@
       </VBox>
       <AnchorPane fx:id="selectMoviepane" layoutX="333.0" layoutY="45.0" prefHeight="590.0" prefWidth="289.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="ancrpane_addMovie" visible="false" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="578.0" AnchorPane.topAnchor="35.0">
          <children>
-            <AnchorPane layoutX="62.0" layoutY="14.0" prefHeight="179.0" prefWidth="160.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px;" />
+            <AnchorPane layoutX="50.0" layoutY="14.0" prefHeight="186.0" prefWidth="184.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px;">
+               <children>
+                  <ImageView fx:id="movieimageview" fitHeight="186.0" fitWidth="184.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
             <Label layoutX="22.0" layoutY="281.0" text="Movie Title" />
-            <TextField layoutX="113.0" layoutY="277.0" />
-            <TextField layoutX="113.0" layoutY="315.0" />
-            <TextField layoutX="113.0" layoutY="357.0" />
+            <TextField fx:id="txtmovietitlein" layoutX="113.0" layoutY="277.0" />
+            <TextField fx:id="txtmoviegenrein" layoutX="113.0" layoutY="315.0" />
+            <TextField fx:id="txtdurationin" layoutX="113.0" layoutY="357.0" />
             <Label layoutX="22.0" layoutY="319.0" text="Genre" />
             <Label layoutX="22.0" layoutY="361.0" text="Duration" />
             <Label layoutX="22.0" layoutY="399.0" text="Published date" />
-            <Button layoutX="116.0" layoutY="217.0" mnemonicParsing="false" text="Import" />
-            <Button layoutX="144.0" layoutY="463.0" mnemonicParsing="false" text="Delete " />
-            <Button layoutX="29.0" layoutY="463.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Add " />
-            <DatePicker layoutX="113.0" layoutY="395.0" prefHeight="25.0" prefWidth="149.0" />
-            <Button layoutX="30.0" layoutY="508.0" mnemonicParsing="false" text="Update " />
-            <Button layoutX="142.0" layoutY="509.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Clear" />
+            <Button fx:id="importimgurlbtn" layoutX="116.0" layoutY="217.0" mnemonicParsing="false" onAction="#importImage" text="Import" />
+            <Button layoutX="144.0" layoutY="463.0" mnemonicParsing="false" onAction="#deletemoviebtn" text="Delete " />
+            <Button layoutX="29.0" layoutY="463.0" mnemonicParsing="false" onAction="#addmoviebtn" prefHeight="25.0" prefWidth="59.0" text="Add " />
+            <DatePicker fx:id="txtpublishdate" layoutX="113.0" layoutY="395.0" prefHeight="25.0" prefWidth="149.0" />
+            <Button layoutX="30.0" layoutY="508.0" mnemonicParsing="false" onAction="#updmoviebtn" text="Update " />
+            <Button layoutX="142.0" layoutY="509.0" mnemonicParsing="false" onAction="#cleartxtfieldsbtn" prefHeight="25.0" prefWidth="59.0" text="Clear" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="movieTablepane" layoutX="645.0" layoutY="43.0" prefHeight="590.0" prefWidth="543.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px;" styleClass="ancrpane_addMovie" visible="false" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="35.0">
          <children>
-            <TableView layoutY="53.0" prefHeight="610.0" prefWidth="533.0" style="-fx-background-radius: 8PX;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="53.0">
-              <columns>
-                <TableColumn prefWidth="120.0" text="Movie Title" />
-                <TableColumn prefWidth="97.0" text="Genre" />
-                  <TableColumn prefWidth="141.0" text="Duration" />
-                  <TableColumn prefWidth="172.0" text="Movie Publish Date" />
-              </columns>
+            <Button fx:id="tablereload" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshtable" text="Refresh" />
+            <TableView fx:id="moviesTableView11" layoutY="45.0" onMouseClicked="#selectaddremMovie" prefHeight="536.0" prefWidth="543.0">
+               <columns>
+                  <TableColumn fx:id="movieIdColumn11" prefWidth="62.0" text="Id" />
+                  <TableColumn fx:id="movieTitleColumn11" prefWidth="99.0" text="MovieTitle" />
+                  <TableColumn fx:id="moviePublishDateColumn11" prefWidth="138.0" text="publishedDate" />
+                  <TableColumn fx:id="Moviedurationcoloumn11" prefWidth="130.0" text="MovieDuration" />
+                  <TableColumn fx:id="movieGenreColumn11" prefWidth="111.0" text="Genre" />
+               </columns>
             </TableView>
-            <TextField layoutX="252.0" layoutY="14.0" prefHeight="25.0" prefWidth="218.0" />
-            <Button layoutX="470.0" layoutY="14.0" mnemonicParsing="false" text="Search">
-               <graphic>
-                  <FontAwesomeIcon glyphName="SEARCH" />
-               </graphic>
-            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="bannerPane" prefHeight="30.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="621.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -179,7 +179,7 @@
                   <FontAwesomeIcon glyphName="MINUS" />
                </graphic>
             </Button>
-            <Button layoutX="1142.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" style="-fx-cursor: hand; -fx-background-color: #fff;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button layoutX="1142.0" layoutY="13.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="40.0" style="-fx-cursor: hand; -fx-background-color: #fff;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <graphic>
                   <FontAwesomeIcon glyphName="CLOSE" wrappingWidth="10.428571701049805" />
                </graphic>
@@ -192,28 +192,33 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="updateMoviePane" layoutX="337.0" layoutY="42.0" prefHeight="557.0" prefWidth="846.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="42.0">
+      <AnchorPane fx:id="updateMoviePane" layoutX="337.0" layoutY="42.0" prefHeight="599.0" prefWidth="860.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="42.0">
          <children>
-            <TableView layoutX="101.0" layoutY="119.0" prefHeight="589.0" prefWidth="846.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button layoutX="402.0" layoutY="573.0" mnemonicParsing="false" onAction="#customer_tab_refresh" text="Refresh" />
+            <TableView fx:id="customertabview" layoutX="101.0" layoutY="119.0" prefHeight="568.0" prefWidth="860.0" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                  <TableColumn prefWidth="148.0" text="Customer id" />
-                  <TableColumn prefWidth="148.0" text="Customer name" />
-                  <TableColumn prefWidth="186.0" text="Movie name" />
-                  <TableColumn prefWidth="169.0" text="Ticket ID" />
-                  <TableColumn prefWidth="193.0" text="Timestamp" />
+                  <TableColumn fx:id="customerID_col" prefWidth="75.0" text="Customer id" />
+                  <TableColumn fx:id="customerName_col" prefWidth="96.0" text="Customer name" />
+                  <TableColumn fx:id="movieId_col" prefWidth="61.0" text="Movie ID" />
+                  <TableColumn fx:id="movieName_col" prefWidth="83.0" text="Movie name" />
+                  <TableColumn fx:id="ticketId_col" prefWidth="64.0" text="Ticket ID" />
+                  <TableColumn fx:id="timestamp_col" text="Timestamp" />
+                  <TableColumn fx:id="no_of_premium_tik" prefWidth="151.0" text="No.of Premium tickets" />
+                  <TableColumn fx:id="no_of_normal_tik" prefWidth="138.0" text="No.of Normal tickets" />
+                  <TableColumn fx:id="total_amt_col" prefWidth="112.0" text="Total amount" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="moviesPlayingpane" layoutX="336.0" layoutY="38.0" prefHeight="582.0" prefWidth="857.0" AnchorPane.bottomAnchor="26.0" AnchorPane.topAnchor="35.0">
+      <AnchorPane fx:id="moviesPlayingpane" layoutX="329.0" layoutY="45.0" prefHeight="599.0" prefWidth="860.0" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="329.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="45.0">
          <children>
-            <TableView layoutX="24.0" layoutY="32.0" prefHeight="590.0" prefWidth="857.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="moviesTableView1" layoutX="333.0" layoutY="31.0" prefHeight="599.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn prefWidth="110.0" text="Movie Id" />
-                  <TableColumn prefWidth="164.0" text="Movie name" />
-                  <TableColumn prefWidth="172.0" text="Published date" />
-                  <TableColumn prefWidth="193.0" text="Movie Duration" />
-                  <TableColumn prefWidth="217.0" text="Genre" />
+                  <TableColumn fx:id="movieIdColumn1" prefWidth="100.0" text="Id" />
+                  <TableColumn fx:id="movieTitleColumn1" prefWidth="299.0" text="MovieTitle" />
+                  <TableColumn fx:id="moviePublishDateColumn1" prefWidth="159.0" text="publishedDate" />
+                  <TableColumn fx:id="Moviedurationcoloumn1" prefWidth="172.0" text="MovieDuration" />
+                  <TableColumn fx:id="movieGenreColumn1" prefWidth="129.0" text="Genre" />
                </columns>
             </TableView>
          </children>

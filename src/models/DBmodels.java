@@ -10,178 +10,271 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class DBmodels {
 
-    private Connection conn = null;
-    private ResultSet rs = null;
-    private PreparedStatement pst = null;
+	private Connection conn = null;
+	private ResultSet rs = null;
+	private PreparedStatement pst = null;
 
-    public boolean loginUser(String username, String password, String userType) {
-        conn = mysqlconnect.connectdb();
-        String sql = "SELECT * FROM moviebooking_user_table WHERE U_username = ? AND U_password = ? AND U_type = ?";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, password);
-            pst.setString(3, userType);
+	public boolean loginUser(String username, String password, String userType) {
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT * FROM moviebooking_user_table WHERE U_username = ? AND U_password = ? AND U_type = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			pst.setString(3, userType);
 
-            rs = pst.executeQuery();
+			rs = pst.executeQuery();
 
-            return rs.next();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        } finally {
-            closeResources();
-        }
-    }
+			return rs.next();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+			return false;
+		} finally {
+			closeResources();
+		}
+	}
 
-    public void addUser(String username, String email, String password, String name, String userType) {
-        conn = mysqlconnect.connectdb();
-        String sql = "INSERT INTO moviebooking_user_table (U_username, U_email, U_password, U_name, U_type) VALUES (?, ?, ?, ?, ?)";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, email);
-            pst.setString(3, password);
-            pst.setString(4, name);
-            pst.setString(5, userType);
-            pst.execute();
+	public ObservableList<Users> fetchUserdata() {
 
-            JOptionPane.showMessageDialog(null, "Added user!");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-    }
-    
-    public void addMovie(String title, String genre, String publishDate, String imgUrl) {
-        conn = mysqlconnect.connectdb();
-        String sql = "INSERT INTO moviebooking_movie_table (Movie_title, Movie_genre, Movie_publishdate, Movie_imgurl) VALUES (?, ?, ?, ?)";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, title);
-            pst.setString(2, genre);
-            pst.setString(3, publishDate);
-            pst.setString(4, imgUrl);
-            pst.execute();
+		ObservableList<Users> userinfo = FXCollections.observableArrayList();
+		conn = mysqlconnect.connectdb();
+		String sql = " SELECT * FROM moviebooking_user_table ";
 
-            JOptionPane.showMessageDialog(null, "Added movie!");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-    }
-    
-    public List<Movie> getMovies() {
-        conn = mysqlconnect.connectdb();
-        String sql = "SELECT * FROM moviebooking_movie_table";
-        List<Movie> movies = new ArrayList<Movie>();
-        try {
-            pst = conn.prepareStatement(sql);
-            rs = pst.executeQuery();
+		try {
 
-            while (rs.next()) {
-                Movie movie = new Movie(
-                        rs.getInt("Movie_id"),
-                        rs.getString("Movie_title"),
-                        rs.getString("Movie_genre"),
-                        rs.getDate("Movie_publishdate"),
-                        rs.getString("Movie_imgurl")
-                );
-                movies.add(movie);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-        return movies;
-    }
-    
-    public void deleteMovie(int movieId) {
-        conn = mysqlconnect.connectdb();
-        String sql = "DELETE FROM moviebooking_movie_table WHERE Movie_id = ?";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1, movieId);
-            pst.execute();
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
 
-            JOptionPane.showMessageDialog(null, "Deleted movie!");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-    }
+			while(rs.next()) {
 
-    private void closeResources() {
-        try {
-            if (rs != null) rs.close();
-            if (pst != null) pst.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    public class Movie {
-        private int id;
-        private String title;
-        private String genre;
-        private java.sql.Date publishDate;
-        private String imgUrl;
+				Users userInfo = new Users();
 
-        public Movie(int id, String title, String genre, java.sql.Date publishDate, String imgUrl) {
-            this.id = id;
-            this.title = title;
-            this.genre = genre;
-            this.publishDate = publishDate;
-            this.imgUrl = imgUrl;
-        }
+				userInfo.setUsername(rs.getString("U_username"));
+				userInfo.setEmail_id(rs.getString("U_email"));
+				userInfo.setPassword(rs.getString("U_password"));
+				userInfo.setName(rs.getString("U_name"));
+				userInfo.setType_of_user(rs.getString("U_type"));
 
-		public int getId() {
-			return id;
+				userinfo.add(userInfo);
+
+			}
+
+		}catch (Exception e) {
+
+			e.printStackTrace();
+
+		}finally {
+			
+		closeResources();
+
 		}
 
-		public void setId(int id) {
-			this.id = id;
-		}
+		return userinfo;
 
-		public String getTitle() {
-			return title;
-		}
+	}
 
-		public void setTitle(String title) {
-			this.title = title;
-		}
+	public ObservableList<BookingData> fetchUserBookingdata() {
+		ObservableList<BookingData> userData = FXCollections.observableArrayList();
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT b.booking_id, b.U_username, b.Movie_id, b.Movie_title, " +
+				"b.booking_timestamp, b.booking_no_premium_tickets, " +
+				"b.booking_no_normal_tickets, b.total, u.U_name "+
+				"FROM moviebooking_booking_table b " +
+				"JOIN moviebooking_user_table u ON b.U_username = u.U_username ";
 
-		public String getGenre() {
-			return genre;
-		}
+		try {
+			pst = conn.prepareStatement(sql);
 
-		public void setGenre(String genre) {
-			this.genre = genre;
-		}
+			rs = pst.executeQuery();
 
-		public java.sql.Date getPublishDate() {
-			return publishDate;
-		}
+			while (rs.next()) {
+				BookingData bookingData = new BookingData();
 
-		public void setPublishDate(java.sql.Date publishDate) {
-			this.publishDate = publishDate;
-		}
+				bookingData.setUsername(rs.getString("U_username"));
+				bookingData.setU_name(rs.getString("U_name"));
+				bookingData.setMovieId(rs.getString("Movie_id"));
+				bookingData.setMovieTitle(rs.getString("Movie_title"));
+				bookingData.setBookingId(rs.getString("booking_id"));
+				bookingData.setTimestamp(rs.getTimestamp("booking_timestamp"));
+				bookingData.setNo_of_premium_tickets(rs.getDouble("booking_no_premium_tickets"));
+				bookingData.setNo_of_normal_tickets(rs.getDouble("booking_no_normal_tickets"));
+				bookingData.setTotal_cost(rs.getDouble("total"));
 
-		public String getImgUrl() {
-			return imgUrl;
-		}
 
-		public void setImgUrl(String imgUrl) {
-			this.imgUrl = imgUrl;
+				userData.add(bookingData);
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+
+		} finally {
+			closeResources();
 		}
-        
-    }
+		return userData;
+	}
+
+
+	public void addUser(String username, String email, String password, String name, String userType) {
+		conn = mysqlconnect.connectdb();
+		String sql = "INSERT INTO moviebooking_user_table (U_username, U_email, U_password, U_name, U_type) VALUES (?, ?, ?, ?, ?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, email);
+			pst.setString(3, password);
+			pst.setString(4, name);
+			pst.setString(5, userType);
+			pst.execute();
+
+			JOptionPane.showMessageDialog(null, "Added user!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+	public void UpdateUser(String username, String email, String password, String name, String userType) {
+		conn = mysqlconnect.connectdb();
+		String sql = "UPDATE moviebooking_user_table SET U_username = ? , U_email = ?, U_password = ?, U_name = ?, U_type = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, email);
+			pst.setString(3, password);
+			pst.setString(4, name);
+			pst.setString(5, userType);
+			pst.execute();
+
+			JOptionPane.showMessageDialog(null, "Updated user!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+	public void addMovie(String title, String genre, String publishDate, String duration, String imgUrl) {
+		conn = mysqlconnect.connectdb();
+		String sql = "INSERT INTO moviebooking_movie_table (Movie_title, Movie_genre, Movie_publishdate, Movie_duration, Movie_imgurl) VALUES (?, ?, ?, ?,?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, title);
+			pst.setString(2, genre);
+			pst.setString(3, publishDate);
+			pst.setString(4, duration);
+			pst.setString(5, imgUrl);
+			pst.execute();
+
+			JOptionPane.showMessageDialog(null, "Added movie!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+	// Inside the DBmodels class
+
+	public void updateMovie(int movieId, String title, String genre, String publishDate, String duration, String imgUrl) {
+		conn = mysqlconnect.connectdb();
+		String sql = "UPDATE moviebooking_movie_table SET Movie_title = ?, Movie_genre = ?, Movie_publishdate = ?, Movie_duration = ?, Movie_imgurl = ? WHERE Movie_id = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, title);
+			pst.setString(2, genre);
+			pst.setString(3, publishDate);
+			pst.setString(4, duration);
+			pst.setString(5, imgUrl);
+			pst.setInt(6, movieId);
+
+			pst.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated movie!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+
+	public List<Movie> getMovies() {
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT * FROM moviebooking_movie_table";
+		List<Movie> movies = new ArrayList<Movie>();
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Movie movie = new Movie(
+						rs.getInt("Movie_id"),
+						rs.getString("Movie_title"),
+						rs.getString("Movie_genre"),
+						rs.getDate("Movie_publishdate"),
+						rs.getTime("Movie_duration"),
+						rs.getString("Movie_imgurl")
+						);
+				movies.add(movie);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+		return movies;
+	}
+
+	public void deleteMovie(int movieId) {
+		conn = mysqlconnect.connectdb();
+		String sql = "DELETE FROM moviebooking_movie_table WHERE Movie_id = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, movieId);
+			pst.execute();
+
+			JOptionPane.showMessageDialog(null, "Deleted movie!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+	public void deleteuser(String User,String user_type) {
+		conn = mysqlconnect.connectdb();
+		String sql = "DELETE FROM moviebooking_user_table WHERE U_username = ? AND U_type = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, User);
+			pst.setString(2, user_type);
+			pst.execute();
+
+			JOptionPane.showMessageDialog(null, "Deleted User!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
+
+	private void closeResources() {
+		try {
+			if (rs != null) rs.close();
+			if (pst != null) pst.close();
+			if (conn != null) conn.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+
+
 }

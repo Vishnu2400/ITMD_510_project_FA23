@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -144,7 +145,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="scrollImgpane" layoutX="369.0" layoutY="260.0" prefHeight="376.0" prefWidth="821.0" style="-fx-background-color: #fff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-radius: 8px;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="260.0">
+      <AnchorPane fx:id="scrollImgpane" layoutX="369.0" layoutY="260.0" prefHeight="376.0" prefWidth="821.0" style="-fx-background-color: #fff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-radius: 8px;" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="260.0">
          <children>
             <Button layoutX="-1.0" layoutY="156.0" mnemonicParsing="false" onAction="#back" prefHeight="73.0" prefWidth="25.0" style="-fx-background-color: transparent;" text="&lt;" AnchorPane.bottomAnchor="147.0" AnchorPane.topAnchor="156.0">
                <font>
@@ -161,30 +162,46 @@
             <ImageView fx:id="img3" fitHeight="393.0" fitWidth="846.0" layoutX="-25.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="cashdashboardpane" layoutX="353.0" layoutY="45.0" prefHeight="200.0" prefWidth="839.0">
+      <AnchorPane fx:id="cashdashboardpane" layoutX="353.0" layoutY="45.0" prefHeight="200.0" prefWidth="839.0" visible="false">
          <children>
             <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0)000000;" styleClass="card2" stylesheets="@ui.css" />
             <AnchorPane layoutX="574.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card3" stylesheets="@ui.css" />
             <AnchorPane layoutX="294.0" layoutY="11.0" prefHeight="179.0" prefWidth="263.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card1" stylesheets="@ui.css" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addAdminpane" layoutX="357.0" layoutY="45.0" prefHeight="713.0" prefWidth="846.0" visible="false">
+      <AnchorPane fx:id="addAdminpane" layoutX="357.0" layoutY="45.0" prefHeight="592.0" prefWidth="839.0">
          <children>
-            <TableView layoutX="24.0" layoutY="11.0" prefHeight="445.0" prefWidth="795.0">
+            <TableView fx:id="admin_update_table" layoutX="462.0" layoutY="11.0" prefHeight="424.0" prefWidth="366.0">
                <columns>
-                  <TableColumn prefWidth="152.0" text="Admin username" />
-                  <TableColumn prefWidth="388.0" text="Email id" />
-                  <TableColumn prefWidth="254.0" text="Password" />
+                  <TableColumn fx:id="admin_username_col" prefWidth="127.0" text="Admin username" />
+                  <TableColumn fx:id="Admin_name_col" text="Admin name" />
+                  <TableColumn fx:id="admin_email_col" prefWidth="77.0" text="Email id" />
+                  <TableColumn fx:id="admin_password_col" text="Password" />
                </columns>
             </TableView>
-            <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" text="Add Admin">
+            <Button layoutX="517.0" layoutY="507.0" mnemonicParsing="false" onAction="#deleteadminbtn" text="Delete Admin">
+               <graphic>
+                  <FontAwesomeIcon glyphName="TRASH" />
+               </graphic>
+            </Button>
+            <Button layoutX="144.0" layoutY="507.0" mnemonicParsing="false" onAction="#addadimbtn" text="Add Admin">
                <graphic>
                   <FontAwesomeIcon glyphName="USER_PLUS" />
                </graphic>
             </Button>
-            <Button layoutX="517.0" layoutY="507.0" mnemonicParsing="false" text="Delete Admin">
+            <TextField fx:id="admin_username" layoutX="242.0" layoutY="146.0" />
+            <TextField fx:id="admin_email" layoutX="242.0" layoutY="184.0" />
+            <TextField fx:id="admin_password" layoutX="242.0" layoutY="223.0" />
+            <TextField fx:id="admin_name" layoutX="242.0" layoutY="261.0" />
+            <Label layoutX="135.0" layoutY="150.0" text="UserName" />
+            <Label layoutX="135.0" layoutY="188.0" text="Email" />
+            <Label layoutX="135.0" layoutY="227.0" text="Password" />
+            <Label layoutX="135.0" layoutY="265.0" text="Name" />
+            <TextField fx:id="type_field" editable="false" layoutX="242.0" layoutY="298.0" text="Admin" />
+            <Label layoutX="138.0" layoutY="302.0" text="Type" />
+            <Button layoutX="334.0" layoutY="507.0" mnemonicParsing="false" onAction="#updateadminbtn" text="Update Admin">
                <graphic>
-                  <FontAwesomeIcon glyphName="USER_TIMES" />
+                  <FontAwesomeIcon glyphName="PENCIL" />
                </graphic>
             </Button>
          </children>
