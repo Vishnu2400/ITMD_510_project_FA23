@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -133,23 +136,25 @@ public class DBmodels {
 			pst.execute();
 
 			JOptionPane.showMessageDialog(null, "Added user!");
-		} catch (SQLException e) {
+		}  	catch (SQLIntegrityConstraintViolationException duplicateKeyException) {
+	        JOptionPane.showMessageDialog(null, "Duplicate entry for primary key. User with the same username already exists.");
+	    }	catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
-		} finally {
+		} 	finally {
 			closeResources();
 		}
 	}
 
 	public void UpdateUser(String username, String email, String password, String name, String userType) {
 		conn = mysqlconnect.connectdb();
-		String sql = "UPDATE moviebooking_user_table SET U_username = ? , U_email = ?, U_password = ?, U_name = ?, U_type = ?";
+		String sql = "UPDATE moviebooking_user_table SET U_email = ?, U_password = ?, U_name = ?, U_type = ? WHERE U_username = ?";
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, username);
-			pst.setString(2, email);
-			pst.setString(3, password);
-			pst.setString(4, name);
-			pst.setString(5, userType);
+			pst.setString(1, email);
+			pst.setString(2, password);
+			pst.setString(3, name);
+			pst.setString(4, userType);
+			pst.setString(5, username);
 			pst.execute();
 
 			JOptionPane.showMessageDialog(null, "Updated user!");
@@ -159,6 +164,58 @@ public class DBmodels {
 			closeResources();
 		}
 	}
+	
+	public String countMovies() {
+	    conn = mysqlconnect.connectdb();
+	    String sql = "SELECT COUNT(Movie_id) AS movie_count FROM moviebooking_movie_table";
+	    
+	    try {
+	        pst = conn.prepareStatement(sql);
+	        rs = pst.executeQuery();
+
+	        if (rs.next()) {
+	            return rs.getString("movie_count");
+	        }
+	    } catch (SQLException e) {
+	        JOptionPane.showMessageDialog(null, e);
+	    } finally {
+	        closeResources();
+	    }
+
+	    // Return -1 or another appropriate value in case of an error
+	    return null;
+	}
+	
+	public Map<String, Double> getBookingSummary() {
+	    conn = mysqlconnect.connectdb();
+	    String sql = "SELECT SUM(booking_no_premium_tickets) AS no_Of_Premium_tickets, " +
+	                 "SUM(booking_no_normal_tickets) AS no_Of_Normal_tickets, " +
+	                 "SUM(total) AS total_sum FROM moviebooking_booking_table";
+
+	    try {
+	        pst = conn.prepareStatement(sql);
+	        rs = pst.executeQuery();
+
+	        if (rs.next()) {
+	            Map<String, Double> summaryMap = new HashMap<>();
+	            summaryMap.put("no_Of_Premium_tickets", rs.getDouble("no_Of_Premium_tickets"));
+	            summaryMap.put("no_Of_Normal_tickets", rs.getDouble("no_Of_Normal_tickets"));
+	            summaryMap.put("total_sum", rs.getDouble("total_sum"));
+	            return summaryMap;
+	        }
+	    } catch (SQLException e) {
+	        JOptionPane.showMessageDialog(null, e);
+	    } finally {
+	        closeResources();
+	    }
+
+	    // Return null or another appropriate value in case of an error
+	    return null;
+	}
+
+
+	
+	
 
 	public void addMovie(String title, String genre, String publishDate, String duration, String imgUrl) {
 		conn = mysqlconnect.connectdb();

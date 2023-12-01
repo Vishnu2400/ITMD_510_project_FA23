@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +16,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -49,6 +53,9 @@ public class AdminPanelController {
 	private Button insertmoviebtn;
 
 	private String imageUrl;
+
+	@FXML
+	private Button signoutid;
 
 
 	@FXML
@@ -91,6 +98,9 @@ public class AdminPanelController {
 
 	@FXML
 	private TextField txtdurationin;
+
+	@FXML
+	private Button minimizebtn;
 
 	@FXML
 	private TextField txtmoviegenrein;
@@ -155,6 +165,9 @@ public class AdminPanelController {
 	@FXML
 	private TableColumn<Movie, String> Moviedurationcoloumn11;
 
+	@FXML
+	private AnchorPane adminmainpane;
+
 
 
 
@@ -165,7 +178,22 @@ public class AdminPanelController {
 
 	public void initialize() {
 
-		handleAddMoviesButton();
+		handleshowmoviesplaying();
+
+		minimizebtn.setOnAction(e -> {
+			((Stage) minimizebtn.getScene().getWindow()).setIconified(true);
+		});
+
+		adminmainpane.setOnMousePressed(event -> {
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+		});
+
+		adminmainpane.setOnMouseDragged(event -> {
+			Stage stage = (Stage) adminmainpane.getScene().getWindow();
+			stage.setX(event.getScreenX() - xOffset);
+			stage.setY(event.getScreenY() - yOffset);
+		});
 
 	}
 
@@ -339,12 +367,12 @@ public class AdminPanelController {
 
 
 	}
-	
+
 
 	private void loadBookingData(TableView<BookingData> tableView, TableColumn<BookingData, String> usernameColumn,TableColumn<BookingData, String> uname,
-			 					TableColumn<BookingData, String> movieIdColumn,TableColumn<BookingData, String> movieTitleColumn, TableColumn<BookingData, String> bookingIdColumn,
-			 					TableColumn<BookingData, Timestamp> timestampColumn,TableColumn<BookingData, Double> premiumTicketsColumn, TableColumn<BookingData, Double> normalTicketsColumn,
-			 					TableColumn<BookingData, Double> totalColumn) 
+			TableColumn<BookingData, String> movieIdColumn,TableColumn<BookingData, String> movieTitleColumn, TableColumn<BookingData, String> bookingIdColumn,
+			TableColumn<BookingData, Timestamp> timestampColumn,TableColumn<BookingData, Double> premiumTicketsColumn, TableColumn<BookingData, Double> normalTicketsColumn,
+			TableColumn<BookingData, Double> totalColumn) 
 	{
 		List<BookingData> userDataList = dbOperations.fetchUserBookingdata();
 
@@ -385,15 +413,15 @@ public class AdminPanelController {
 		updateMoviePane.setVisible(true);
 
 		loadBookingData(customertabview,
-						customerID_col,
-						customerName_col,
-						movieId_col,
-						movieName_col,
-						ticketId_col,
-						timestamp_col,
-						no_of_premium_tik,
-						no_of_normal_tik,
-						total_amt_col);
+				customerID_col,
+				customerName_col,
+				movieId_col,
+				movieName_col,
+				ticketId_col,
+				timestamp_col,
+				no_of_premium_tik,
+				no_of_normal_tik,
+				total_amt_col);
 
 	}
 
@@ -417,10 +445,10 @@ public class AdminPanelController {
 
 		loadMoviesData(moviesTableView11, movieIdColumn11, movieTitleColumn11, moviePublishDateColumn11, Moviedurationcoloumn11, movieGenreColumn11);
 	}
-	
+
 	@FXML
 	void customer_tab_refresh() {
-		
+
 		loadBookingData(customertabview,
 				customerID_col,
 				customerName_col,
@@ -431,14 +459,36 @@ public class AdminPanelController {
 				no_of_premium_tik,
 				no_of_normal_tik,
 				total_amt_col);
-		
+
 	}
-	
-	
+
+	@FXML
+	void signout() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginPanel.fxml"));
+			Parent root = loader.load();
+
+			// Get the stage from the current scene
+			Stage stage = (Stage) signoutid.getScene().getWindow();
+
+			// Create a new scene with the login panel
+			Scene scene = new Scene(root);
+
+			// Set the stage's scene to the new scene
+			stage.setScene(scene);
+
+			// Show the stage
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 
 	@FXML
 	void exit() {
-		// Get the source of the event, which is the button
 		System.exit(0);
 	}
 

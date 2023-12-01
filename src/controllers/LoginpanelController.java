@@ -43,6 +43,9 @@ public class LoginpanelController implements Initializable {
 
 	@FXML
 	private Button btn_login;
+	
+	@FXML
+    private Button logminimizebtn;
 
 	@FXML
 	private AnchorPane pane_signup;
@@ -154,7 +157,8 @@ public class LoginpanelController implements Initializable {
 		// Get the source of the event, which is the button
 		System.exit(0);
 	}
-
+	
+	
 
 	@FXML
 	private void add_users(ActionEvent event) {
@@ -171,6 +175,10 @@ public class LoginpanelController implements Initializable {
 		type.getItems().addAll("Admin","User","Manager");
 		pane_login.setVisible(true);
 		pane_signup.setVisible(false);
+		
+		logminimizebtn.setOnAction(e -> {
+            ((Stage) logminimizebtn.getScene().getWindow()).setIconified(true);
+        });
 	}    
 
 }

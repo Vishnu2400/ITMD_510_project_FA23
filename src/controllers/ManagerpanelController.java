@@ -1,11 +1,20 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -13,6 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.DBmodels;
 import models.Users;
 
@@ -52,6 +63,9 @@ public class ManagerpanelController {
 
     @FXML
     private AnchorPane cashdashboardpane;
+    
+    @FXML
+    private Button minimizeid;
 
     @FXML
     private ImageView img1;
@@ -61,16 +75,75 @@ public class ManagerpanelController {
 
     @FXML
     private ImageView img3;
+   
+    @FXML
+    private AnchorPane managermainpane;
+    
+    @FXML
+    private Button signoutid;
 
     @FXML
     private AnchorPane scrollImgpane;
 
     @FXML
     private TextField type_field;
+    
+    @FXML
+    private Label no_of_moviesvalue;
+
+    @FXML
+    private Label normal_ticket_value;
+
+    @FXML
+    private Label pre_ticket_value;
+    
+    @FXML
+    private Label total_earnings_value;
 
     @FXML
     private VBox vboxmenu;
+    
+    private double xOffset = 0;
+	private double yOffset = 0;
+    
+	private int currentVisibleIndex = 0;
+    
+    public void initialize() {
+		
+    	minimizeid.setOnAction(e -> {
+            ((Stage) minimizeid.getScene().getWindow()).setIconified(true);
+        });
+		
+    	managermainpane.setOnMousePressed(event -> {
+	        xOffset = event.getSceneX();
+	        yOffset = event.getSceneY();
+	    });
 
+    	managermainpane.setOnMouseDragged(event -> {
+	        Stage stage = (Stage) managermainpane.getScene().getWindow();
+	        stage.setX(event.getScreenX() - xOffset);
+	        stage.setY(event.getScreenY() - yOffset);
+	    });
+    	
+    	handleDashboardButton();
+    	
+    	setImages();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(5), event -> {
+                    currentVisibleIndex = (currentVisibleIndex + 1) % 3;
+                    setImages();
+                })
+        );
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+  
+
+	}
+
+   
+    
     @FXML
     void addadimbtn() {
         // Get text from text fields
@@ -93,16 +166,10 @@ public class ManagerpanelController {
         }
     }
 
-
-    @FXML
-    void back() {
-
-    }
-    
     private final DBmodels dbOperations = new DBmodels();
     
     @FXML
-    public void selectadminfromtab(MouseEvent event) {
+    void selectadminfromtab(MouseEvent event) {
     	
     	
     	Users userData = admin_update_table.getSelectionModel().getSelectedItem();
@@ -119,6 +186,9 @@ public class ManagerpanelController {
   	
     	
     }
+    
+    
+    
     
     private void loaduserDataToTable(TableView<Users> tableView, TableColumn<Users, String> Username,
 			TableColumn<Users, String> name,
@@ -148,22 +218,62 @@ public class ManagerpanelController {
     	
 
     }
-
     
-
-    @FXML
-    void next() {
-
+    private void setImages() {
+        // Set visibility based on the currentVisibleIndex
+        img1.setVisible(currentVisibleIndex % 3 == 0);
+        img2.setVisible(currentVisibleIndex % 3 == 1);
+        img3.setVisible(currentVisibleIndex % 3 == 2);
     }
 
+    
+   
     @FXML
     void updateadminbtn() {
     	
     	dbOperations.UpdateUser(admin_username.getText(), admin_email.getText(), admin_password.getText(), admin_name.getText(), "Admin");
+    	
+    	
 
     }
     
+   
     
+    @FXML
+	void signout() {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginPanel.fxml"));
+	        Parent root = loader.load();
+	        
+	        // Get the stage from the current scene
+	        Stage stage = (Stage) signoutid.getScene().getWindow();
+	        
+	        // Create a new scene with the login panel
+	        Scene scene = new Scene(root);
+	        
+	        // Set the stage's scene to the new scene
+	        stage.setScene(scene);
+	        
+	        // Show the stage
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+    @FXML
+    void loadadminrefresh() {
+    	
+    	loaduserDataToTable(admin_update_table, admin_username_col, Admin_name_col, admin_email_col, admin_password_col);
+
+    }
+	
+
+	@FXML
+	void exit() {
+		System.exit(0);
+	}
+	
 
 
 	@FXML
@@ -172,7 +282,21 @@ public class ManagerpanelController {
 		cashdashboardpane.setVisible(true);
 		scrollImgpane.setVisible(true);
 		addAdminpane.setVisible(false);
-		// Hide other panes as needed
+		
+		no_of_moviesvalue.setText(dbOperations.countMovies());
+		
+		Map<String, Double> summaryMap = dbOperations.getBookingSummary();
+
+		if (summaryMap != null) {
+			normal_ticket_value.setText(summaryMap.get("no_Of_Premium_tickets").toString());
+			pre_ticket_value.setText(summaryMap.get("no_Of_Normal_tickets").toString());
+		    total_earnings_value.setText("$"+summaryMap.get("total_sum").toString());
+		} else {
+		    System.out.println("Error retrieving booking summary");
+		}
+		
+		
+		
 	}
 
 	@FXML
