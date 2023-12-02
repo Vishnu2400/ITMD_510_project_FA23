@@ -5,6 +5,8 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -37,7 +39,7 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="pane_login" layoutX="496.0" layoutY="134.0" prefHeight="301.0" prefWidth="419.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="16.0">
+      <AnchorPane fx:id="pane_login" layoutX="496.0" layoutY="134.0" prefHeight="301.0" prefWidth="419.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="496.0" AnchorPane.rightAnchor="16.0">
          <children>
             <TextField fx:id="txt_username" layoutX="45.0" layoutY="81.0" prefHeight="40.0" prefWidth="361.0" promptText="Enter UserName" style="-fx-border-width: 0px 0px 1px 0px; -fx-background-color: transparent; -fx-border-color: #AAB2FF;">
                <font>
@@ -53,14 +55,15 @@
                </font>
             </PasswordField>
             <ComboBox fx:id="type" layoutX="185.0" layoutY="14.0" prefHeight="40.0" prefWidth="218.0" promptText="Choose Type" />
-            <Button fx:id="btn_login" layoutX="88.0" layoutY="203.0" mnemonicParsing="false" onAction="#Login" onMouseClicked="#exit" prefHeight="51.0" prefWidth="275.0" style="-fx-background-color: #AAB2FF;" text="Login" textFill="WHITE">
+            <Button fx:id="btn_login" layoutX="134.0" layoutY="227.0" mnemonicParsing="false" onAction="#Login" onMouseClicked="#exit" prefHeight="51.0" prefWidth="184.0" style="-fx-background-color: #AAB2FF;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Times New Roman Bold" size="28.0" />
                </font>
             </Button>
+            <Hyperlink fx:id="forgotpassbtn" layoutX="294.0" layoutY="192.0" onAction="#forgotpasshl" text="Forgot Password?" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane_signup" layoutX="500.0" layoutY="123.0" prefHeight="323.0" prefWidth="431.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="499.0" AnchorPane.rightAnchor="1.0">
+      <AnchorPane fx:id="pane_signup" layoutX="500.0" layoutY="123.0" prefHeight="323.0" prefWidth="431.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="499.0" AnchorPane.rightAnchor="1.0">
          <children>
             <TextField fx:id="txt_username_up" layoutX="185.0" layoutY="112.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Username" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0px 0px 1px 0px;" />
             <TextField fx:id="txt_password_up" layoutX="185.0" layoutY="151.0" prefHeight="30.0" prefWidth="218.0" promptText="Enter Your Password" style="-fx-background-color: #fff; -fx-border-color: #AAB2FF; -fx-border-width: 0 0 1 0px;" />
@@ -102,6 +105,20 @@
                   <FontAwesomeIcon glyphName="CLOSE" size="1.2em" />
                </graphic>
             </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="forgotpane" layoutX="534.0" layoutY="83.0" prefHeight="310.0" prefWidth="260.0" styleClass="vbox" stylesheets="@ui.css" visible="false">
+         <children>
+            <FontAwesomeIcon glyphName="LOCK" layoutX="110.0" layoutY="65.0" size="5em" text="" wrappingWidth="35.65707015991211" />
+            <Label layoutX="82.0" layoutY="85.0" text="Forgot Password">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="63.0" layoutY="129.0" promptText="UserName" />
+            <TextField layoutX="63.0" layoutY="169.0" promptText="password" />
+            <TextField layoutX="63.0" layoutY="208.0" promptText="confirm password" />
+            <Button layoutX="97.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Proceed" />
          </children>
       </AnchorPane>
    </children>

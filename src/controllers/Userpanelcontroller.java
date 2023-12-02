@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import models.DBmodels;
 import models.Movie;
 public class Userpanelcontroller  {    
@@ -123,6 +125,17 @@ public class Userpanelcontroller  {
 	@FXML
 	private AnchorPane selectmoviebuttonpane;
 	
+
+//    @FXML
+//    private  Button exit_btn;
+    
+
+	 @FXML
+	    private Button minimize_btn;
+    
+//    @FXML
+//    private Button signout;
+	
 	private int movieId_fromTab;
 	
 	private String movie_title_fromtab;
@@ -170,9 +183,13 @@ public class Userpanelcontroller  {
 	void initialize() {
 
 		showSpinnerValue();
+		clearinfo();
+		
+		minimize_btn.setOnAction(e  -> {
+			((Stage) minimize_btn.getScene().getWindow()).setIconified(true);
+		});
 
 
-//		spinnervalue();
 		
 		
 		loadMoviesData(bookmovie_table, bookmovie_col_title, bookmovie_col_date, bookmovie_col_genre);
@@ -254,6 +271,8 @@ public class Userpanelcontroller  {
 		purchaseprise_normal.setText("$"+ String.valueOf(price2));
 		purchaseprise_total.setText("$"+ String.valueOf(total));
 		
+	
+		
 		
 	}
 	
@@ -268,6 +287,7 @@ public class Userpanelcontroller  {
 		   Timestamp bookedtime = new Timestamp(currentTimeMillis);
 		   
 		   dbOperations.Bookticket(username, movieId_fromTab, movie_title_fromtab, bookedtime, q1,q2,total);
+		   
 
 	    }
 	   
@@ -276,6 +296,29 @@ public class Userpanelcontroller  {
 	        user_name.setText(username); 
 	       
 	    }
+	   
+	   public void clearinfo() {
+		   spinner1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
+			spinner2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
+
+			purchasequantity_premium.setValueFactory(spinner1);
+			purchasequantity_normal.setValueFactory(spinner2);
+			
+			purchaseprise_premium.setText("$0.0");
+			purchaseprise_normal.setText("$0.0");
+			purchaseprise_total.setText("$0.0");
+			
+		   
+	   }
+	   
+	   public void receipt() {
+		   
+		   
+		   
+	   }
+	   
+	   
+	   
 	   
 
       
