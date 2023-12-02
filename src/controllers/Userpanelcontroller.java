@@ -23,7 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import models.DBmodels;
-import models.DBmodels.Movie;
+import models.Movie;
 public class Userpanelcontroller  {    
 
 	private static final java.sql.Timestamp Timestamp = null;
@@ -35,16 +35,16 @@ public class Userpanelcontroller  {
 	private AnchorPane barpane;
 
 	@FXML
-	private TableColumn<DBmodels.Movie, Date> bookmovie_col_date;
+	private TableColumn<Movie, Date> bookmovie_col_date;
 
 	@FXML
-	private TableColumn<DBmodels.Movie, String> bookmovie_col_genre;
+	private TableColumn<Movie, String> bookmovie_col_genre;
 
 	@FXML
-	private TableColumn<DBmodels.Movie, String> bookmovie_col_title;
+	private TableColumn<Movie, String> bookmovie_col_title;
 
 	@FXML
-	private TableView<DBmodels.Movie> bookmovie_table;
+	private TableView<Movie> bookmovie_table;
 
 	@FXML
 	private Button bookmoviebutton;
@@ -282,12 +282,5 @@ public class Userpanelcontroller  {
 
 
 }
-
-
-
-
-
-
-
 
 

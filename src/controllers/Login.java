@@ -1,9 +1,12 @@
 package controllers;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -15,6 +18,12 @@ public class Login extends Application {
 	
 	private double xOffset = 0;
     private double yOffset = 0;
+    
+    @FXML
+    private Button logminimizebtn;
+    
+    @FXML
+    private AnchorPane loginmainpane;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -32,7 +41,8 @@ public class Login extends Application {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
-
+        
+        
         // Handle mouse dragged event to move the window
         root.setOnMouseDragged(event -> {
             primaryStage.setX(event.getScreenX() - xOffset);

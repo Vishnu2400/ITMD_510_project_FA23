@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="931.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginpanelController">
+<AnchorPane fx:id="loginmainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="931.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginpanelController">
    <children>
       <HBox layoutX="497.0" layoutY="42.0" prefHeight="78.0" prefWidth="433.0" style="-fx-border-color: #AAB2FF; -fx-border-width: 2;" AnchorPane.leftAnchor="497.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="42.0">
          <children>
@@ -92,7 +92,7 @@
       </ImageView>
       <AnchorPane layoutX="246.0" layoutY="7.0" prefHeight="23.0" prefWidth="931.0" styleClass="lgntppane" stylesheets="@ui.css" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="879.0" layoutY="7.0" mnemonicParsing="false" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="879.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="logminimizebtn" layoutX="879.0" layoutY="7.0" mnemonicParsing="false" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="879.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="0.0">
                <graphic>
                   <FontAwesomeIcon glyphName="MINUS" size="1.2em" />
                </graphic>
