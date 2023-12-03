@@ -92,32 +92,20 @@
                   </Label>
                   <AnchorPane prefHeight="350.0" prefWidth="291.0">
                      <children>
-                        <Button fx:id="mybookingbutton" layoutX="67.2" layoutY="100.0" mnemonicParsing="false" onAction="#mybookings" prefHeight="20.0" prefWidth="182.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="My Bookings" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="100.0">
+                        <Button fx:id="mybookingbutton" layoutX="70.0" layoutY="119.0" mnemonicParsing="false" onAction="#mybookings" prefHeight="25.0" prefWidth="166.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="My Bookings" textAlignment="JUSTIFY" textFill="#f58428" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="119.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
                            <graphic>
                               <FontAwesomeIcon glyphName="SERVER" size="15PX" />
                            </graphic>
                         </Button>
-                        <Button fx:id="bookmoviebutton" layoutX="58.0" layoutY="30.0" mnemonicParsing="false" onAction="#bookmovie" prefHeight="44.0" prefWidth="201.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="Book Movie" textAlignment="CENTER" textFill="#f58428" wrapText="true" AnchorPane.bottomAnchor="292.4" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="30.0">
+                        <Button fx:id="bookmoviebutton" layoutX="71.2" layoutY="35.0" mnemonicParsing="false" onAction="#bookmovie" prefHeight="38.0" prefWidth="166.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-background-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text=" Book Movie" textAlignment="CENTER" textFill="#f58428" wrapText="true" AnchorPane.bottomAnchor="309.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="35.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
-                           <graphic>
-                              <FontAwesomeIcon glyphName="DASHBOARD" size="15PX" />
-                           </graphic>
-                           <padding>
-                              <Insets right="30.0" />
-                           </padding>
                         </Button>
-                        <Button fx:id="signout" alignment="BOTTOM_LEFT" layoutX="97.0" layoutY="205.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="127.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="SignOut" textFill="#f58428">
-                           <padding>
-                              <Insets bottom="4.0" left="20.0" />
-                           </padding>
+                        <Button fx:id="signout_btn" alignment="BOTTOM_LEFT" layoutX="91.0" layoutY="224.0" mnemonicParsing="false" onAction="#signout_user" prefHeight="40.0" prefWidth="126.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0); -fx-background-color: #fff; -fx-border-radius: 8px; -fx-graphic-text-gap: 10px; -fx-cursor: hand;" text="SignOut" textFill="#f58428">
                            <graphic>
                               <FontAwesomeIcon glyphName="SIGN_OUT" selectionStart="0" size="15PX" textAlignment="JUSTIFY" />
                            </graphic>
@@ -125,6 +113,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
+                        <FontAwesomeIcon glyphName="FILM" layoutX="80.0" layoutY="61.0" size="15PX" text="" />
                      </children>
                      <VBox.margin>
                         <Insets top="40.0" />
@@ -141,16 +130,14 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="minimize_btn" layoutX="1105.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="minimize_btn" layoutX="1116.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="25.0" style="-fx-background-color: transparent;">
                      <graphic>
-                        <FontAwesomeIcon glyphName="MINUS" size="2em" />
-                     </graphic>
-                  </Button>
-                  <Button fx:id="exit_btn" layoutX="1135.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: translate;">
+                        <FontAwesomeIcon glyphName="MINUS" size="1.5em" />
+                     </graphic></Button>
+                  <Button fx:id="exit_btn" layoutX="1147.0" layoutY="6.0" mnemonicParsing="false" onAction="#close" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: translate;">
                      <graphic>
-                        <FontAwesomeIcon glyphName="CLOSE" size="2em" />
-                     </graphic>
-                  </Button>
+                        <FontAwesomeIcon glyphName="CLOSE" size="1.5em" />
+                     </graphic></Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="selectmoviebuttonpane" layoutX="333.0" layoutY="49.0" prefHeight="202.0" prefWidth="306.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card1" stylesheets="@ui.css" visible="false">
@@ -283,49 +270,49 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="Mybookingpane" layoutX="547.0" layoutY="71.0" prefHeight="482.0" prefWidth="423.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card1" stylesheets="@ui.css">
+            <AnchorPane fx:id="Mybookingpane" layoutX="510.0" layoutY="125.0" prefHeight="429.0" prefWidth="388.0" style="-fx-background-radius: 10 10 10 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,.3), 8, 0,0,0);" styleClass="card1" stylesheets="@ui.css" visible="false">
                <children>
-                  <Label layoutX="92.0" layoutY="197.0" stylesheets="@ui.css" text="Movie Title:">
+                  <Label layoutX="102.0" layoutY="197.0" stylesheets="@ui.css" text="Movie Title:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="97.0" layoutY="135.0" prefHeight="20.0" prefWidth="69.0" stylesheets="@ui.css" text="Ticket ID:">
+                  <Label layoutX="117.0" layoutY="135.0" prefHeight="20.0" prefWidth="69.0" stylesheets="@ui.css" text="Ticket ID:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="98.0" layoutY="262.0" prefHeight="20.0" prefWidth="59.0" stylesheets="@ui.css" text="Book">
+                  <Label layoutX="122.0" layoutY="262.0" prefHeight="20.0" prefWidth="59.0" stylesheets="@ui.css" text="Bookon:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="121.0" layoutY="321.0" prefHeight="20.0" prefWidth="49.0" stylesheets="@ui.css" text="Total:">
+                  <Label layoutX="142.0" layoutY="321.0" prefHeight="20.0" prefWidth="49.0" stylesheets="@ui.css" text="Total:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mybookings_ticketid" layoutX="228.0" layoutY="135.0" prefHeight="20.0" prefWidth="88.0" stylesheets="@ui.css" text="Movie Title:">
+                  <Label fx:id="mybookings_ticketid" layoutX="209.0" layoutY="135.0" prefHeight="20.0" prefWidth="138.0" stylesheets="@ui.css" text="Movie Title:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mybookings_title" layoutX="228.0" layoutY="197.0" prefHeight="20.0" prefWidth="88.0" stylesheets="@ui.css" text="Movie Title:">
+                  <Label fx:id="mybookings_title" layoutX="212.0" layoutY="197.0" prefHeight="20.0" prefWidth="165.0" stylesheets="@ui.css" text="Movie Title:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mybookings_genre" layoutX="228.0" layoutY="262.0" prefHeight="20.0" prefWidth="88.0" stylesheets="@ui.css" text="Movie Title:">
+                  <Label fx:id="mybookings_date" layoutX="209.0" layoutY="262.0" prefHeight="20.0" prefWidth="150.0" stylesheets="@ui.css" text="Movie Title:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="mybookings_date" layoutX="228.0" layoutY="321.0" prefHeight="20.0" prefWidth="88.0" stylesheets="@ui.css" text="Movie Title:">
+                  <Label fx:id="mybookings_total" layoutX="209.0" layoutY="321.0" prefHeight="20.0" prefWidth="166.0" stylesheets="@ui.css" text="Movie Title:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="146.0" layoutY="41.0" text="Receipt">
+                  <Label layoutX="123.0" layoutY="40.0" text="Receipt">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>

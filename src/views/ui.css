@@ -4,7 +4,7 @@
 .selectmovie_card,
 .vbox{
 	-fx-background-color:linear-gradient(to top right,#84FFC9,#AAB2FF);
-	-fx-border-radius:transparent;
+	-fx-border-radius:10px;
 	
 }
 #addbtn,

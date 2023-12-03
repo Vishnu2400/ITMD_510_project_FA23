@@ -19,7 +19,7 @@
 
 <AnchorPane fx:id="loginmainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="931.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginpanelController">
    <children>
-      <HBox layoutX="497.0" layoutY="42.0" prefHeight="78.0" prefWidth="433.0" style="-fx-border-color: #AAB2FF; -fx-border-width: 2;" AnchorPane.leftAnchor="497.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="42.0">
+      <HBox fx:id="lgnsignupPane" layoutX="497.0" layoutY="42.0" prefHeight="78.0" prefWidth="433.0" style="-fx-border-color: #AAB2FF; -fx-border-width: 2;" AnchorPane.leftAnchor="497.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="42.0">
          <children>
             <Button mnemonicParsing="false" onAction="#LoginpaneShow" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: #AAB2FF;" text="Login" textFill="WHITE">
                <font>
@@ -107,7 +107,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="forgotpane" layoutX="534.0" layoutY="83.0" prefHeight="310.0" prefWidth="260.0" styleClass="vbox" stylesheets="@ui.css" visible="false">
+      <AnchorPane fx:id="forgotpasswordpane" layoutX="534.0" layoutY="83.0" prefHeight="310.0" prefWidth="260.0" styleClass="vbox" stylesheets="@ui.css">
          <children>
             <FontAwesomeIcon glyphName="LOCK" layoutX="110.0" layoutY="65.0" size="5em" text="" wrappingWidth="35.65707015991211" />
             <Label layoutX="82.0" layoutY="85.0" text="Forgot Password">
@@ -115,10 +115,19 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="63.0" layoutY="129.0" promptText="UserName" />
-            <TextField layoutX="63.0" layoutY="169.0" promptText="password" />
-            <TextField layoutX="63.0" layoutY="208.0" promptText="confirm password" />
-            <Button layoutX="97.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Proceed" />
+            <TextField fx:id="updt_uname" layoutX="63.0" layoutY="129.0" promptText="UserName" />
+            <Button layoutX="141.0" layoutY="252.0" mnemonicParsing="false" onAction="#updatepassword_btn" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Proceed">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="53.0" layoutY="252.0" mnemonicParsing="false" onAction="#backtologin" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Back">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <PasswordField layoutX="63.0" layoutY="166.0" promptText="Enter new Password" />
+            <PasswordField fx:id="updt_cpassword" layoutX="63.0" layoutY="204.0" promptText="Confirm Password" />
          </children>
       </AnchorPane>
    </children>

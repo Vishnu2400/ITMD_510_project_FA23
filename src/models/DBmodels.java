@@ -70,14 +70,42 @@ public class DBmodels {
 			e.printStackTrace();
 
 		}finally {
-			
-		closeResources();
+
+			closeResources();
 
 		}
 
 		return userinfo;
 
 	}
+
+
+
+
+	public User_tickets getLatestBookingForUser1(String username) {
+		try {
+			conn = mysqlconnect.connectdb();
+			String query = "SELECT * FROM moviebooking_booking_table WHERE U_username = ? ORDER BY booking_id DESC LIMIT 1";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, username);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				int retrievedTicketId = resultSet.getInt("booking_id");
+				double retrievedTotal = resultSet.getDouble("total");
+				Timestamp retrievedDate = resultSet.getTimestamp("booking_timestamp");
+				String retrievedMovieTitle = resultSet.getString("Movie_title");
+
+				return new User_tickets(retrievedTicketId, retrievedTotal, retrievedDate, retrievedMovieTitle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null; // Return null if no data found or an error occurred
+	}
+
 
 	public ObservableList<BookingData> fetchUserBookingdata() {
 		ObservableList<BookingData> userData = FXCollections.observableArrayList();
@@ -134,8 +162,8 @@ public class DBmodels {
 
 			JOptionPane.showMessageDialog(null, "Added user!");
 		}  	catch (SQLIntegrityConstraintViolationException duplicateKeyException) {
-	        JOptionPane.showMessageDialog(null, "Duplicate entry for primary key. User with the same username already exists.");
-	    }	catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Duplicate entry for primary key. User with the same username already exists.");
+		}	catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 		} 	finally {
 			closeResources();
@@ -161,58 +189,58 @@ public class DBmodels {
 			closeResources();
 		}
 	}
-	
+
 	public String countMovies() {
-	    conn = mysqlconnect.connectdb();
-	    String sql = "SELECT COUNT(Movie_id) AS movie_count FROM moviebooking_movie_table";
-	    
-	    try {
-	        pst = conn.prepareStatement(sql);
-	        rs = pst.executeQuery();
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT COUNT(Movie_id) AS movie_count FROM moviebooking_movie_table";
 
-	        if (rs.next()) {
-	            return rs.getString("movie_count");
-	        }
-	    } catch (SQLException e) {
-	        JOptionPane.showMessageDialog(null, e);
-	    } finally {
-	        closeResources();
-	    }
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
 
-	    // Return -1 or another appropriate value in case of an error
-	    return null;
+			if (rs.next()) {
+				return rs.getString("movie_count");
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+
+		// Return -1 or another appropriate value in case of an error
+		return null;
 	}
-	
+
 	public Map<String, Double> getBookingSummary() {
-	    conn = mysqlconnect.connectdb();
-	    String sql = "SELECT SUM(booking_no_premium_tickets) AS no_Of_Premium_tickets, " +
-	                 "SUM(booking_no_normal_tickets) AS no_Of_Normal_tickets, " +
-	                 "SUM(total) AS total_sum FROM moviebooking_booking_table";
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT SUM(booking_no_premium_tickets) AS no_Of_Premium_tickets, " +
+				"SUM(booking_no_normal_tickets) AS no_Of_Normal_tickets, " +
+				"SUM(total) AS total_sum FROM moviebooking_booking_table";
 
-	    try {
-	        pst = conn.prepareStatement(sql);
-	        rs = pst.executeQuery();
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
 
-	        if (rs.next()) {
-	            Map<String, Double> summaryMap = new HashMap<>();
-	            summaryMap.put("no_Of_Premium_tickets", rs.getDouble("no_Of_Premium_tickets"));
-	            summaryMap.put("no_Of_Normal_tickets", rs.getDouble("no_Of_Normal_tickets"));
-	            summaryMap.put("total_sum", rs.getDouble("total_sum"));
-	            return summaryMap;
-	        }
-	    } catch (SQLException e) {
-	        JOptionPane.showMessageDialog(null, e);
-	    } finally {
-	        closeResources();
-	    }
+			if (rs.next()) {
+				Map<String, Double> summaryMap = new HashMap<>();
+				summaryMap.put("no_Of_Premium_tickets", rs.getDouble("no_Of_Premium_tickets"));
+				summaryMap.put("no_Of_Normal_tickets", rs.getDouble("no_Of_Normal_tickets"));
+				summaryMap.put("total_sum", rs.getDouble("total_sum"));
+				return summaryMap;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
 
-	    // Return null or another appropriate value in case of an error
-	    return null;
+		// Return null or another appropriate value in case of an error
+		return null;
 	}
 
 
-	
-	
+
+
 
 	public void addMovie(String title, String genre, String publishDate, String duration, String imgUrl) {
 		conn = mysqlconnect.connectdb();
@@ -318,29 +346,56 @@ public class DBmodels {
 			closeResources();
 		}
 	}
-	
+
 	public void Bookticket(String username, int movie_id, String movie_title, Timestamp bookedtime, double no_premium_tickets, double no_of_normal_tickets, double total_cost) {
-        String sql = "INSERT INTO moviebooking_booking_table(U_username, Movie_id, Movie_title, booking_timestamp, booking_no_premium_tickets, booking_no_normal_tickets, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        conn = mysqlconnect.connectdb();
+		String sql = "INSERT INTO moviebooking_booking_table(U_username, Movie_id, Movie_title, booking_timestamp, booking_no_premium_tickets, booking_no_normal_tickets, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		conn = mysqlconnect.connectdb();
 
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, username);  // Set the username
-            pst.setInt(2, movie_id);  // Set the movie_id
-            pst.setString(3, movie_title);  // Set the movie_title
-            pst.setTimestamp(4, bookedtime);  // Set the bookedtime
-            pst.setDouble(5, no_premium_tickets);  // Set the no_premium_tickets
-            pst.setDouble(6, no_of_normal_tickets);  // Set the no_of_normal_tickets
-            pst.setDouble(7, total_cost);  // Set the total_cost
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);  // Set the username
+			pst.setInt(2, movie_id);  // Set the movie_id
+			pst.setString(3, movie_title);  // Set the movie_title
+			pst.setTimestamp(4, bookedtime);  // Set the bookedtime
+			pst.setDouble(5, no_premium_tickets);  // Set the no_premium_tickets
+			pst.setDouble(6, no_of_normal_tickets);  // Set the no_of_normal_tickets
+			pst.setDouble(7, total_cost);  // Set the total_cost
 
-            pst.execute();
+			pst.execute();
 
-            JOptionPane.showMessageDialog(null, "Booked movie!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+			JOptionPane.showMessageDialog(null, "Booked movie!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+	public void updatePassword(String username, String newPassword) {
+		String updateQuery = "UPDATE moviebooking_user_table SET U_password = ? WHERE U_username = ?";
+		conn = mysqlconnect.connectdb();
+
+
+		try  {
+			PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+			// Set parameters for the prepared statement
+			preparedStatement.setString(1, newPassword);
+			preparedStatement.setString(2, username);
+
+			// Execute the update
+			int rowsAffected = preparedStatement.executeUpdate();
+
+			if (rowsAffected > 0) {
+				System.out.println("Password updated successfully for user: " + username);
+			} else {
+				System.out.println("No user found with the username: " + username);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle exceptions accordingly
+		}finally {
+			closeResources();
+		}
+	}
 
 	private void closeResources() {
 		try {

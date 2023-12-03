@@ -6,6 +6,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.DBmodels;
@@ -30,6 +32,14 @@ public class LoginpanelController implements Initializable {
 
 	@FXML
 	private AnchorPane pane_login;
+	
+	
+	@FXML
+	private AnchorPane forgotpasswordpane; 
+	
+	@FXML
+	private HBox  lgnsignupPane;
+	
 
 	@FXML
 	private TextField txt_username;
@@ -62,6 +72,15 @@ public class LoginpanelController implements Initializable {
 	@FXML
 	private TextField email_up;
 	
+	@FXML
+	private TextField updt_uname;
+	
+	@FXML
+    private PasswordField updt_cpassword;
+	
+	@FXML
+    private PasswordField updt_password;
+	
     @FXML
     private AnchorPane forgotpane;
 
@@ -87,13 +106,56 @@ public class LoginpanelController implements Initializable {
 
 		pane_login.setVisible(true);
 		pane_signup.setVisible(false);
+		forgotpasswordpane.setVisible(false);
+		lgnsignupPane.setVisible(true);
 	}
 
 	public void SignuppaneShow(){
 
 		pane_login.setVisible(false);
 		pane_signup.setVisible(true);
+		forgotpasswordpane.setVisible(false);
+		lgnsignupPane.setVisible(true);
 	}
+	
+	@FXML
+    void forgotpasshl() {
+	 
+	 forgotpasswordpane.setVisible(true);
+	 pane_login.setVisible(false);
+	 pane_signup.setVisible(false);
+	 lgnsignupPane.setVisible(false);
+
+    }
+
+		
+	
+	public void updatepassword_btn() {
+	    String usern = updt_uname.getText();
+	    String cpassword = updt_cpassword.getText();
+	    String Updtpassword = updt_password.getText();
+
+	    while (!cpassword.equals(Updtpassword)) {
+	        JOptionPane.showMessageDialog(null, "Incorrect password. Please re-enter.");
+	        // Re-prompt the user for the correct password
+	        cpassword = updt_cpassword.getText();
+	        Updtpassword = updt_password.getText();
+	    }
+
+	    // Call the updatePassword method
+	    dbOperations.updatePassword(usern, cpassword);
+	    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+	    
+	    LoginpaneShow();
+	}
+
+	
+    @FXML
+    void backtologin() {
+    	
+    	LoginpaneShow();
+
+    }
 
 
 	@FXML  
@@ -181,25 +243,14 @@ public class LoginpanelController implements Initializable {
 		type.getItems().addAll("Admin","User","Manager");
 		pane_login.setVisible(true);
 		pane_signup.setVisible(false);
-
 		
 		logminimizebtn.setOnAction(e -> {
             ((Stage) logminimizebtn.getScene().getWindow()).setIconified(true);
         });
 
+		forgotpasswordpane.setVisible(false);
+		lgnsignupPane.setVisible(true);
 	}  
-	
-	 @FXML
-	    void forgotpasshl(ActionEvent event) {
-		 
-		 forgotpane.setVisible(true);
-		 pane_login.setVisible(false);
-		 pane_signup.setVisible(false);
-		 
-		 
-		 
-
-	    }
 
 
 }
