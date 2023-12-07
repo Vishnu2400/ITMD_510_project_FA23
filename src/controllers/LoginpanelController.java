@@ -6,11 +6,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -92,6 +93,14 @@ public class LoginpanelController implements Initializable {
 	private Button clsbtn1;
 
 	private String usernamefromtxt;
+	
+	@FXML
+	private Label infoLabel;
+	
+	String usern;
+	String cpassword ;
+	String Updtpassword ;
+			                   
 
 	Connection conn = null;
 	ResultSet rs = null;
@@ -131,20 +140,30 @@ public class LoginpanelController implements Initializable {
 		
 	
 	public void updatepassword_btn() {
-	    String usern = updt_uname.getText();
-	    String cpassword = updt_cpassword.getText();
-	    String Updtpassword = updt_password.getText();
+	   usern = updt_uname.getText();
+	   cpassword = updt_cpassword.getText();
+	   Updtpassword = updt_password.getText();
 
-	    while (!cpassword.equals(Updtpassword)) {
-	        JOptionPane.showMessageDialog(null, "Incorrect password. Please re-enter.");
-	        // Re-prompt the user for the correct password
-	        cpassword = updt_cpassword.getText();
-	        Updtpassword = updt_password.getText();
-	    }
+	    Platform.runLater(() -> {
+            while (!cpassword.equals(Updtpassword)) {
+                infoLabel.setText("Incorrect password. Please re-enter.");
+               
+                cpassword = updt_cpassword.getText();
+                Updtpassword = updt_password.getText();
+            }
+
+            // Passwords match; perform actions or update labels accordingly
+            infoLabel.setText("Password updated successfully!");
+            
+        });
 
 	    // Call the updatePassword method
 	    dbOperations.updatePassword(usern, cpassword);
-	    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+	    
+	    updt_uname.clear();
+	    updt_cpassword.clear();
+	    updt_password.clear();
+	    infoLabel.setText("");
 	    
 	    LoginpaneShow();
 	}
@@ -206,6 +225,7 @@ public class LoginpanelController implements Initializable {
 	                btn_login.getScene().getWindow().hide();
 	                Parent root11 = FXMLLoader.load(getClass().getResource("/views/Managerpanel.fxml"));
 	                Stage mainStage3 = new Stage();
+	                mainStage3.initStyle(StageStyle.UNDECORATED);
 	                Scene scene11 = new Scene(root11);
 	                mainStage3.setScene(scene11);
 	                mainStage3.show();

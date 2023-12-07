@@ -116,18 +116,19 @@
                </font>
             </Label>
             <TextField fx:id="updt_uname" layoutX="63.0" layoutY="129.0" promptText="UserName" />
-            <Button layoutX="141.0" layoutY="252.0" mnemonicParsing="false" onAction="#updatepassword_btn" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Proceed">
+            <Button layoutX="138.0" layoutY="265.0" mnemonicParsing="false" onAction="#updatepassword_btn" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Proceed">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="53.0" layoutY="252.0" mnemonicParsing="false" onAction="#backtologin" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Back">
+            <Button layoutX="44.0" layoutY="265.0" mnemonicParsing="false" onAction="#backtologin" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: orange;" stylesheets="@ui.css" text="Back">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <PasswordField layoutX="63.0" layoutY="166.0" promptText="Enter new Password" />
+            <PasswordField fx:id="updt_password" layoutX="63.0" layoutY="166.0" promptText="Enter new Password" />
             <PasswordField fx:id="updt_cpassword" layoutX="63.0" layoutY="204.0" promptText="Confirm Password" />
+            <Label fx:id="infoLabel" layoutX="33.0" layoutY="240.0" text="   " />
          </children>
       </AnchorPane>
    </children>
