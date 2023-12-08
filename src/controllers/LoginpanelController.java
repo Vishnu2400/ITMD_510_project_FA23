@@ -6,7 +6,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -182,33 +181,35 @@ public class LoginpanelController implements Initializable {
 
 	            case("User"):
 	                JOptionPane.showMessageDialog(null, "Username And Password are Correct");
-
+	            	try {
 	                btn_login.getScene().getWindow().hide();
 	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Userpanel.fxml"));
 	                Parent root1 = loader.load();
 	                Userpanelcontroller upanelcontroller = loader.getController();
-
-	                // Set the username in UserpanelController
 	                upanelcontroller.setUsername(usernamefromtxt);
 	                Stage mainStage2 = new Stage();
 	                mainStage2.initStyle(StageStyle.UNDECORATED);
 	                Scene scene1 = new Scene(root1);
 	                mainStage2.setScene(scene1);
 	                mainStage2.show();
-
-	                // Set dataHolder after the stage is shown
-	                
+	            	}catch (Exception e) {
+	            		e.printStackTrace();
+					}
 	                break;
 
 	            case("Manager"):
 	                JOptionPane.showMessageDialog(null, "Welcome Manager");
-
+	            	try {
 	                btn_login.getScene().getWindow().hide();
 	                Parent root11 = FXMLLoader.load(getClass().getResource("/views/Managerpanel.fxml"));
 	                Stage mainStage3 = new Stage();
+	                mainStage3.initStyle(StageStyle.UNDECORATED);
 	                Scene scene11 = new Scene(root11);
 	                mainStage3.setScene(scene11);
 	                mainStage3.show();
+	            	}catch (Exception e) {
+	            		e.printStackTrace();
+					}
 	                break;
 	        }    
 	    } else {

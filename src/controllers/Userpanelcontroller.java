@@ -1,17 +1,14 @@
 package controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +32,7 @@ import models.DBmodels;
 import models.Movie;
 public class Userpanelcontroller  {    
 
-	private static final java.sql.Timestamp Timestamp = null;
+
 
 	@FXML
 	private AnchorPane Mybookingpane;
@@ -73,7 +70,7 @@ public class Userpanelcontroller  {
 	@FXML
 	private Label mybookings_date;
 
-	
+
 
 	@FXML
 	private Label user_name;
@@ -81,12 +78,8 @@ public class Userpanelcontroller  {
 	@FXML
 	private Label mybookings_total;
 
-	
-
 	@FXML
 	private Label mybookings_ticketid;
-
-
 
 	@FXML
 	private Label mybookings_title;
@@ -133,25 +126,27 @@ public class Userpanelcontroller  {
 	@FXML
 	private AnchorPane selectmoviebuttonpane;
 
-
-	//    @FXML
-	//    private  Button exit_btn;
-
-
 	@FXML
 	private Button minimize_btn;
 
-	//    @FXML
-	//    private Button signout;
-
 	private int movieId_fromTab;
-
 	private String movie_title_fromtab;
+	private String username;
+	
+	public SpinnerValueFactory<Integer> spinner1;
+	public SpinnerValueFactory<Integer> spinner2;
+	public double price1;
+	public double price2;
+	public double total;
+	public double quantity1;
+	public double quantity2;
+
 
 	DBmodels dbOperations = new DBmodels();
 
 	@FXML
 	void bookmovie() {
+		
 		Mybookingpane.setVisible(false);
 		movieimagepane.setVisible(true);
 		movietablepane.setVisible(true);
@@ -164,20 +159,24 @@ public class Userpanelcontroller  {
 
 	@FXML
 	void mybookings() {
+		
 		Mybookingpane.setVisible(true);
 		movieimagepane.setVisible(false);
 		movietablepane.setVisible(false);
 		selectmoviebuttonpane.setVisible(false);
 		purchaseticketspane.setVisible(false);
-		
-		
+
+
 		receipt();
 
 
 	}
 
-	private void loadMoviesData(TableView<Movie> tableView, TableColumn<Movie, String> movieTitleColumn, TableColumn<Movie, java.sql.Date> moviePublishDateColumn, TableColumn<Movie, String> movieGenreColumn)  
-	{
+	private void loadMoviesData(TableView<Movie> tableView, 
+								TableColumn<Movie, String> movieTitleColumn, 
+								TableColumn<Movie, java.sql.Date> moviePublishDateColumn, 
+								TableColumn<Movie, String> movieGenreColumn) {
+		
 		List<Movie> movies = dbOperations.getMovies();
 
 		// Load data into the TableView
@@ -197,16 +196,13 @@ public class Userpanelcontroller  {
 		clearinfo();
 		bookmovie();
 
-
-
 		minimize_btn.setOnAction(e  -> {
-			((Stage) minimize_btn.getScene().getWindow()).setIconified(true);
-		});
+			((Stage) minimize_btn.getScene().getWindow()).setIconified(true);});
 
-
-
-
-		loadMoviesData(bookmovie_table, bookmovie_col_title, bookmovie_col_date, bookmovie_col_genre);
+		loadMoviesData(bookmovie_table, 
+					   bookmovie_col_title, 
+					   bookmovie_col_date, 
+					   bookmovie_col_genre);
 
 	}
 
@@ -225,6 +221,7 @@ public class Userpanelcontroller  {
 		movie_title_fromtab= movie.getTitle();
 
 	}
+	
 
 	@FXML
 	void selectmovie_btn() {
@@ -255,16 +252,7 @@ public class Userpanelcontroller  {
 		} 
 
 	}
-
-	public SpinnerValueFactory<Integer> spinner1;
-	public SpinnerValueFactory<Integer> spinner2;
-	public double price1;
-	public double price2;
-	public double total;
-	public double q1;
-	public double q2;
-
-	private String username;
+	
 
 	public void showSpinnerValue() {
 		spinner1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
@@ -276,10 +264,10 @@ public class Userpanelcontroller  {
 	}
 
 	public void spinnervalue(MouseEvent event) {
-		q1 = purchasequantity_premium.getValue();
-		q2 = purchasequantity_normal.getValue();
-		price1 = (q1*25);
-		price2 = (q2*15);
+		quantity1 = purchasequantity_premium.getValue();
+		quantity2 = purchasequantity_normal.getValue();
+		price1 = (quantity1*25);
+		price2 = (quantity2*15);
 		total = (price1 + price2);
 		purchaseprise_premium.setText("$"+ String.valueOf(price1));
 		purchaseprise_normal.setText("$"+ String.valueOf(price2));
@@ -300,7 +288,13 @@ public class Userpanelcontroller  {
 		long currentTimeMillis = System.currentTimeMillis();
 		Timestamp bookedtime = new Timestamp(currentTimeMillis);
 
-		dbOperations.Bookticket(username, movieId_fromTab, movie_title_fromtab, bookedtime, q1,q2,total);
+		dbOperations.Bookticket(username, 
+								movieId_fromTab, 	
+								movie_title_fromtab, 
+								bookedtime, 
+								quantity1, 
+								quantity2, 
+								total);
 
 
 	}
@@ -332,23 +326,23 @@ public class Userpanelcontroller  {
 	}
 
 	public void receipt() {
-	   
-	    
-	    models.User_tickets latestBooking = dbOperations.getLatestBookingForUser1(username);
 
-	    // Display receipt using retrieved data
-	    if (latestBooking != null) {
-	        // Use the booking details to set the text of JavaFX labels
-	    	mybookings_ticketid.setText(" "+latestBooking.getTicketId());
-	    	mybookings_title.setText(latestBooking.getMovieTitle());
-	    	mybookings_total.setText("$"+latestBooking.getTotal());
-	    	mybookings_date.setText(" "+latestBooking.getDate());
-	        // You can set other labels as needed
-	    } else {
-	        // Display an error message if no booking found or an error occurred
-	    	mybookings_ticketid.setText("No booking found for the user or an error occurred.");
-	        // You can set other labels accordingly
-	    }
+
+		models.User_tickets latestBooking = dbOperations.getLatestBookingForUser1(username);
+
+		// Display receipt using retrieved data
+		if (latestBooking != null) {
+
+			mybookings_ticketid.setText(" "+latestBooking.getTicketId());
+			mybookings_title.setText(latestBooking.getMovieTitle());
+			mybookings_total.setText("$"+latestBooking.getTotal());
+			mybookings_date.setText(" "+latestBooking.getDate());
+
+		} else {
+			// Display an error message if no booking found or an error occurred
+			mybookings_ticketid.setText("No booking found for the user or an error occurred.");
+
+		}
 	}
 
 
@@ -364,7 +358,7 @@ public class Userpanelcontroller  {
 
 			// Ensure the window is not null before using it
 			if (window != null) {
-				// Your sign out logic here
+
 				Alert alert = new Alert(AlertType.CONFIRMATION, "Do you really want to sign out?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
 
@@ -373,11 +367,11 @@ public class Userpanelcontroller  {
 					System.out.println("Signing out...");
 					window.hide(); // Close the window or perform other actions
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginPanel.fxml"));
-	                Parent root1 = loader.load();
-	                Stage stage = (Stage) signout_btn.getScene().getWindow();
-	                Scene scene = new Scene(root1);
-	                stage.setScene(scene);
-	                stage.show();
+					Parent root1 = loader.load();
+					Stage stage = (Stage) signout_btn.getScene().getWindow();
+					Scene scene = new Scene(root1);
+					stage.setScene(scene);
+					stage.show();
 				}
 			} else {
 				System.out.println("Window is null. Button not attached to a scene?");
