@@ -151,10 +151,7 @@ public class LoginpanelController implements Initializable {
                 cpassword = updt_cpassword.getText();
                 Updtpassword = updt_password.getText();
             }
-
-            // Passwords match; perform actions or update labels accordingly
-            infoLabel.setText("Password updated successfully!");
-            
+           
         });
 
 	    // Call the updatePassword method
@@ -163,7 +160,6 @@ public class LoginpanelController implements Initializable {
 	    updt_uname.clear();
 	    updt_cpassword.clear();
 	    updt_password.clear();
-	    infoLabel.setText(" ");
 	    
 	    LoginpaneShow();
 	}
