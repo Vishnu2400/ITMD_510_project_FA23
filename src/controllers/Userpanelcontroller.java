@@ -30,56 +30,57 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import models.DBmodels;
 import models.Movie;
-public class Userpanelcontroller  {    
 
 
-
-	@FXML
-	private AnchorPane Mybookingpane;
-
-	@FXML
-	private AnchorPane barpane;
-
-	@FXML
-	private TableColumn<Movie, Date> bookmovie_col_date;
-
-	@FXML
-	private TableColumn<Movie, String> bookmovie_col_genre;
-
-	@FXML
-	private TableColumn<Movie, String> bookmovie_col_title;
-
-	@FXML
-	private TableView<Movie> bookmovie_table;
-
-	@FXML
-	private Button bookmoviebutton;
-
-	@FXML
-	private ImageView image_pic;
-
-	@FXML
-	private AnchorPane movieimagepane;
-
-	@FXML
-	private AnchorPane movietablepane;
-
-	@FXML
-	private Button mybookingbutton;
-
-	@FXML
-	private Label mybookings_date;
+public class Userpanelcontroller {
 
 
+    // FXML elements
+    @FXML
+    private AnchorPane Mybookingpane;
 
-	@FXML
-	private Label user_name;
+    @FXML
+    private AnchorPane barpane;
 
-	@FXML
-	private Label mybookings_total;
+    @FXML
+    private TableColumn<Movie, Date> bookmovie_col_date;
 
-	@FXML
-	private Label mybookings_ticketid;
+    @FXML
+    private TableColumn<Movie, String> bookmovie_col_genre;
+
+    @FXML
+    private TableColumn<Movie, String> bookmovie_col_title;
+
+    @FXML
+    private TableView<Movie> bookmovie_table;
+
+    @FXML
+    private Button bookmoviebutton;
+
+    @FXML
+    private ImageView image_pic;
+
+    @FXML
+    private AnchorPane movieimagepane;
+
+    @FXML
+    private AnchorPane movietablepane;
+
+    @FXML
+    private Button mybookingbutton;
+
+    @FXML
+    private Label mybookings_date;
+
+
+    @FXML
+    private Label user_name;
+
+    @FXML
+    private Label mybookings_total;
+
+    @FXML
+    private Label mybookings_ticketid;
 
 	@FXML
 	private Label mybookings_title;
@@ -210,7 +211,6 @@ public class Userpanelcontroller  {
 		Movie movie = bookmovie_table.getSelectionModel().getSelectedItem();
 		int num = bookmovie_table.getSelectionModel().getSelectedIndex();
 		movieId_fromTab =movie.getId();
-		System.out.println(movieId_fromTab);
 
 		if((num - 1) < -1) {
 			return;
@@ -361,10 +361,9 @@ public class Userpanelcontroller  {
 
 				Alert alert = new Alert(AlertType.CONFIRMATION, "Do you really want to sign out?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
-
+		
 				if (alert.getResult() == ButtonType.YES) {
 					// Perform sign out actions
-					System.out.println("Signing out...");
 					window.hide(); // Close the window or perform other actions
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoginPanel.fxml"));
 					Parent root1 = loader.load();
@@ -381,7 +380,4 @@ public class Userpanelcontroller  {
 		}
 	}
 
-
-
 }
-

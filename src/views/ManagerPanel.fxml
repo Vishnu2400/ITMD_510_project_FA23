@@ -150,15 +150,15 @@
          <children>
             <ImageView fx:id="img1" fitHeight="376.0" fitWidth="821.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../images/sunrise.jpg" />
+                  <Image url="@../../images/Baahubali.jpg" />
                </image></ImageView>
             <ImageView fx:id="img2" fitHeight="376.0" fitWidth="821.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../images/sunrisesunset6.jpg" />
+                  <Image url="@../../images/Avatar%20movie.jpg" />
                </image></ImageView>
             <ImageView fx:id="img3" fitHeight="376.0" fitWidth="821.0" layoutY="-3.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../images/sunrisesunset7.jpg" />
+                  <Image url="@../../images/RRR.jpg" />
                </image></ImageView>
          </children>
       </AnchorPane>
