@@ -229,7 +229,7 @@ public class AdminPanelController {
 
 	}
 
-
+	//Method for selecting movie.
 	public void selectaddremMovie(MouseEvent event) {
 		Movie movieData = moviesTableView11.getSelectionModel().getSelectedItem();
 		int selNum = moviesTableView11.getSelectionModel().getSelectedIndex();
@@ -462,6 +462,8 @@ public class AdminPanelController {
 
 	}
 
+
+	//Method for Signout.
 	@FXML
 	void signout() {
 		try {
@@ -486,7 +488,7 @@ public class AdminPanelController {
 
 
 
-
+	// Method to clear the text.
 	@FXML
 	void exit() {
 		System.exit(0);

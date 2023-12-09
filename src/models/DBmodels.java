@@ -27,35 +27,35 @@ public class DBmodels {
 	private PreparedStatement pst = null;
 
 	public boolean loginUser(String username, String password, String userType) {
-        conn = mysqlconnect.connectdb();
-        String sql = "SELECT * FROM moviebooking_user_table WHERE U_username = ? AND U_type = ?";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, userType);
+		conn = mysqlconnect.connectdb();
+		String sql = "SELECT * FROM moviebooking_user_table WHERE U_username = ? AND U_type = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, userType);
 
-            rs = pst.executeQuery();
+			rs = pst.executeQuery();
 
-            // If a matching user is found
-            if (rs.next()) {
-                // Retrieve the stored hash from the database
-                String storedHash = rs.getString("U_password");
+			// If a matching user is found
+			if (rs.next()) {
+				// Retrieve the stored hash from the database
+				String storedHash = rs.getString("U_password");
 
-                // Hash the entered password for comparison
-                String enteredPasswordHash = hashPassword(password);
+				// Hash the entered password for comparison
+				String enteredPasswordHash = hashPassword(password);
 
-                // Compare the stored hash with the hash of the entered password
-                return enteredPasswordHash != null && enteredPasswordHash.equals(storedHash);
-            }
+				// Compare the stored hash with the hash of the entered password
+				return enteredPasswordHash != null && enteredPasswordHash.equals(storedHash);
+			}
 
-            return false; // No matching user found
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        } finally {
-            closeResources();
-        }
-    }
+			return false; // No matching user found
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+			return false;
+		} finally {
+			closeResources();
+		}
+	}
 
 	public ObservableList<Users> fetchUserdata() {
 
@@ -162,55 +162,55 @@ public class DBmodels {
 
 
 	public void addUser(String username, String email, String password, String name, String userType) {
-        conn = mysqlconnect.connectdb();
-        String sql = "INSERT INTO moviebooking_user_table (U_username, U_email, U_password, U_name, U_type) VALUES (?, ?, ?, ?, ?)";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, email);
+		conn = mysqlconnect.connectdb();
+		String sql = "INSERT INTO moviebooking_user_table (U_username, U_email, U_password, U_name, U_type) VALUES (?, ?, ?, ?, ?)";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, email);
 
-            // Hash the password before storing it in the database
-            String hashedPassword = hashPassword(password);
-            pst.setString(3, hashedPassword);
+			// Hash the password before storing it in the database
+			String hashedPassword = hashPassword(password);
+			pst.setString(3, hashedPassword);
 
-            pst.setString(4, name);
-            pst.setString(5, userType);
-            pst.execute();
+			pst.setString(4, name);
+			pst.setString(5, userType);
+			pst.execute();
 
-            JOptionPane.showMessageDialog(null, "Added user!");
-        } catch (SQLIntegrityConstraintViolationException duplicateKeyException) {
-            JOptionPane.showMessageDialog(null, "Duplicate entry for primary key. User with the same username already exists.");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-    }
+			JOptionPane.showMessageDialog(null, "Added user!");
+		} catch (SQLIntegrityConstraintViolationException duplicateKeyException) {
+			JOptionPane.showMessageDialog(null, "Duplicate entry for primary key. User with the same username already exists.");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
 
 
 	public void UpdateUser(String username, String email, String password, String name, String userType) {
-        conn = mysqlconnect.connectdb();
-        String sql = "UPDATE moviebooking_user_table SET U_email = ?, U_password = ?, U_name = ?, U_type = ? WHERE U_username = ?";
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, email);
+		conn = mysqlconnect.connectdb();
+		String sql = "UPDATE moviebooking_user_table SET U_email = ?, U_password = ?, U_name = ?, U_type = ? WHERE U_username = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, email);
 
-            // Hash the password before updating it in the database
-            String hashedPassword = hashPassword(password);
-            pst.setString(2, hashedPassword);
+			// Hash the password before updating it in the database
+			String hashedPassword = hashPassword(password);
+			pst.setString(2, hashedPassword);
 
-            pst.setString(3, name);
-            pst.setString(4, userType);
-            pst.setString(5, username);
-            pst.execute();
+			pst.setString(3, name);
+			pst.setString(4, userType);
+			pst.setString(5, username);
+			pst.execute();
 
-            JOptionPane.showMessageDialog(null, "Updated user!");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            closeResources();
-        }
-    }
+			JOptionPane.showMessageDialog(null, "Updated user!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		} finally {
+			closeResources();
+		}
+	}
 
 	public String countMovies() {
 		conn = mysqlconnect.connectdb();
@@ -391,58 +391,58 @@ public class DBmodels {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
-	
+
 	private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] encodedHash = digest.digest(password.getBytes());
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] encodedHash = digest.digest(password.getBytes());
 
-            // Convert byte array to a hexadecimal representation
-            StringBuilder hexStringBuilder = new StringBuilder();
-            for (byte b : encodedHash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexStringBuilder.append('0');
-                }
-                hexStringBuilder.append(hex);
-            }
+			// Convert byte array to a hexadecimal representation
+			StringBuilder hexStringBuilder = new StringBuilder();
+			for (byte b : encodedHash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) {
+					hexStringBuilder.append('0');
+				}
+				hexStringBuilder.append(hex);
+			}
 
-            return hexStringBuilder.toString();
-        } catch (NoSuchAlgorithmException e) {
-            // Handle the exception appropriately
-            e.printStackTrace();
-            return null;
-        }
-    }
+			return hexStringBuilder.toString();
+		} catch (NoSuchAlgorithmException e) {
+			// Handle the exception appropriately
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public void updatePassword(String username, String newPassword) {
-        String updateQuery = "UPDATE moviebooking_user_table SET U_password = ? WHERE U_username = ?";
-        conn = mysqlconnect.connectdb();
+		String updateQuery = "UPDATE moviebooking_user_table SET U_password = ? WHERE U_username = ?";
+		conn = mysqlconnect.connectdb();
 
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
 
-            // Hash the new password before updating it in the database
-            String hashedPassword = hashPassword(newPassword);
-            preparedStatement.setString(1, hashedPassword);
+			// Hash the new password before updating it in the database
+			String hashedPassword = hashPassword(newPassword);
+			preparedStatement.setString(1, hashedPassword);
 
-            preparedStatement.setString(2, username);
+			preparedStatement.setString(2, username);
 
-            // Execute the update
-            int rowsAffected = preparedStatement.executeUpdate();
+			// Execute the update
+			int rowsAffected = preparedStatement.executeUpdate();
 
-            if (rowsAffected > 0) {
-            	JOptionPane.showMessageDialog(null, "Password updated successfully !");
-            } else {
-            	JOptionPane.showMessageDialog(null, "No user found with the" +username+" !");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle exceptions accordingly
-        } finally {
-            closeResources();
-        }
-    }
+			if (rowsAffected > 0) {
+				JOptionPane.showMessageDialog(null, "Password updated successfully !");
+			} else {
+				JOptionPane.showMessageDialog(null, "No user found with the" +username+" !");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle exceptions accordingly
+		} finally {
+			closeResources();
+		}
+	}
 
 	private void closeResources() {
 		try {

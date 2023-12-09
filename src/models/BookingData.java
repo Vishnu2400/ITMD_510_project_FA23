@@ -3,19 +3,19 @@ package models;
 import java.sql.Timestamp;
 
 public class BookingData {
-    private String bookingId;
-    private String username;
-    private String movieId;
-    private String movieTitle;
-    private Timestamp timestamp;
-    private double no_of_premium_tickets;
-    private double no_of_normal_tickets;
-    private double total_cost;
-    private String u_name;
-    
-    
-  
-    
+	private String bookingId;
+	private String username;
+	private String movieId;
+	private String movieTitle;
+	private Timestamp timestamp;
+	private double no_of_premium_tickets;
+	private double no_of_normal_tickets;
+	private double total_cost;
+	private String u_name;
+
+
+
+
 	public String getBookingId() {
 		return bookingId;
 	}
@@ -70,5 +70,5 @@ public class BookingData {
 	public void setU_name(String u_name) {
 		this.u_name = u_name;
 	}
-    
+
 }

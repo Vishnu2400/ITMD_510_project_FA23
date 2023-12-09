@@ -15,49 +15,49 @@ import javafx.stage.StageStyle;
  * @author
  */
 public class Login extends Application {
-	
+
 	private double xOffset = 0;
-    private double yOffset = 0;
-    
-    @FXML
-    private Button logminimizebtn;
-    
-    @FXML
-    private AnchorPane loginmainpane;
-    
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/LoginPanel.fxml"));
-        
-          Scene scene = new Scene(root);   
-//        stage.setScene(scene);
-//        stage.show();
-          primaryStage.initStyle(StageStyle.UNDECORATED);
+	private double yOffset = 0;
 
-        // Set the scene to the stage
-        primaryStage.setScene(scene);
-        
-        root.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        
-        
-        // Handle mouse dragged event to move the window
-        root.setOnMouseDragged(event -> {
-            primaryStage.setX(event.getScreenX() - xOffset);
-            primaryStage.setY(event.getScreenY() - yOffset);
-        });
+	@FXML
+	private Button logminimizebtn;
 
-        // Show the stage
-        primaryStage.show();
-    }
+	@FXML
+	private AnchorPane loginmainpane;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/views/LoginPanel.fxml"));
+
+		Scene scene = new Scene(root);   
+		//        stage.setScene(scene);
+		//        stage.show();
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+
+		// Set the scene to the stage
+		primaryStage.setScene(scene);
+
+		root.setOnMousePressed(event -> {
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+		});
+
+
+		// Handle mouse dragged event to move the window
+		root.setOnMouseDragged(event -> {
+			primaryStage.setX(event.getScreenX() - xOffset);
+			primaryStage.setY(event.getScreenY() - yOffset);
+		});
+
+		// Show the stage
+		primaryStage.show();
+	}
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
+
 }

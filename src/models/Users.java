@@ -2,15 +2,15 @@
 package models;
 
 public class Users {
-	
-	
+
+
 	private String username;
 	private String email_id;
 	private String password;
 	private String name;
 	private String type_of_user;
-	
-	
+
+
 	public String getUsername() {
 		return username;
 	}
@@ -41,8 +41,8 @@ public class Users {
 	public void setType_of_user(String type_of_user) {
 		this.type_of_user = type_of_user;
 	}
-	
-	
-	
+
+
+
 
 }

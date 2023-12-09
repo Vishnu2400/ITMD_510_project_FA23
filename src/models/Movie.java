@@ -1,21 +1,21 @@
 package models;
 
 public class Movie {
-    private int id;
-    private String title;
-    private String genre;
-    private java.sql.Date publishDate;
-    private java.sql.Time duration;
-    private String imgUrl;
+	private int id;
+	private String title;
+	private String genre;
+	private java.sql.Date publishDate;
+	private java.sql.Time duration;
+	private String imgUrl;
 
-    public Movie(int id, String title, String genre, java.sql.Date publishDate, java.sql.Time duration, String imgUrl) {
-        this.id = id;
-        this.title = title;
-        this.genre = genre;
-        this.publishDate = publishDate;
-        this.duration = duration;
-        this.imgUrl = imgUrl;
-    }
+	public Movie(int id, String title, String genre, java.sql.Date publishDate, java.sql.Time duration, String imgUrl) {
+		this.id = id;
+		this.title = title;
+		this.genre = genre;
+		this.publishDate = publishDate;
+		this.duration = duration;
+		this.imgUrl = imgUrl;
+	}
 
 	public int getId() {
 		return id;
@@ -64,6 +64,6 @@ public class Movie {
 	public void setDuration(java.sql.Time duration) {
 		this.duration = duration;
 	}
-    
+
 }
 

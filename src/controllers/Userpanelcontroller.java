@@ -35,52 +35,52 @@ import models.Movie;
 public class Userpanelcontroller {
 
 
-    // FXML elements
-    @FXML
-    private AnchorPane Mybookingpane;
+	// FXML elements
+	@FXML
+	private AnchorPane Mybookingpane;
 
-    @FXML
-    private AnchorPane barpane;
+	@FXML
+	private AnchorPane barpane;
 
-    @FXML
-    private TableColumn<Movie, Date> bookmovie_col_date;
+	@FXML
+	private TableColumn<Movie, Date> bookmovie_col_date;
 
-    @FXML
-    private TableColumn<Movie, String> bookmovie_col_genre;
+	@FXML
+	private TableColumn<Movie, String> bookmovie_col_genre;
 
-    @FXML
-    private TableColumn<Movie, String> bookmovie_col_title;
+	@FXML
+	private TableColumn<Movie, String> bookmovie_col_title;
 
-    @FXML
-    private TableView<Movie> bookmovie_table;
+	@FXML
+	private TableView<Movie> bookmovie_table;
 
-    @FXML
-    private Button bookmoviebutton;
+	@FXML
+	private Button bookmoviebutton;
 
-    @FXML
-    private ImageView image_pic;
+	@FXML
+	private ImageView image_pic;
 
-    @FXML
-    private AnchorPane movieimagepane;
+	@FXML
+	private AnchorPane movieimagepane;
 
-    @FXML
-    private AnchorPane movietablepane;
+	@FXML
+	private AnchorPane movietablepane;
 
-    @FXML
-    private Button mybookingbutton;
+	@FXML
+	private Button mybookingbutton;
 
-    @FXML
-    private Label mybookings_date;
+	@FXML
+	private Label mybookings_date;
 
 
-    @FXML
-    private Label user_name;
+	@FXML
+	private Label user_name;
 
-    @FXML
-    private Label mybookings_total;
+	@FXML
+	private Label mybookings_total;
 
-    @FXML
-    private Label mybookings_ticketid;
+	@FXML
+	private Label mybookings_ticketid;
 
 	@FXML
 	private Label mybookings_title;
@@ -133,7 +133,7 @@ public class Userpanelcontroller {
 	private int movieId_fromTab;
 	private String movie_title_fromtab;
 	private String username;
-	
+
 	public SpinnerValueFactory<Integer> spinner1;
 	public SpinnerValueFactory<Integer> spinner2;
 	public double price1;
@@ -147,7 +147,7 @@ public class Userpanelcontroller {
 
 	@FXML
 	void bookmovie() {
-		
+
 		Mybookingpane.setVisible(false);
 		movieimagepane.setVisible(true);
 		movietablepane.setVisible(true);
@@ -160,7 +160,7 @@ public class Userpanelcontroller {
 
 	@FXML
 	void mybookings() {
-		
+
 		Mybookingpane.setVisible(true);
 		movieimagepane.setVisible(false);
 		movietablepane.setVisible(false);
@@ -174,10 +174,10 @@ public class Userpanelcontroller {
 	}
 
 	private void loadMoviesData(TableView<Movie> tableView, 
-								TableColumn<Movie, String> movieTitleColumn, 
-								TableColumn<Movie, java.sql.Date> moviePublishDateColumn, 
-								TableColumn<Movie, String> movieGenreColumn) {
-		
+			TableColumn<Movie, String> movieTitleColumn, 
+			TableColumn<Movie, java.sql.Date> moviePublishDateColumn, 
+			TableColumn<Movie, String> movieGenreColumn) {
+
 		List<Movie> movies = dbOperations.getMovies();
 
 		// Load data into the TableView
@@ -201,9 +201,9 @@ public class Userpanelcontroller {
 			((Stage) minimize_btn.getScene().getWindow()).setIconified(true);});
 
 		loadMoviesData(bookmovie_table, 
-					   bookmovie_col_title, 
-					   bookmovie_col_date, 
-					   bookmovie_col_genre);
+				bookmovie_col_title, 
+				bookmovie_col_date, 
+				bookmovie_col_genre);
 
 	}
 
@@ -221,7 +221,7 @@ public class Userpanelcontroller {
 		movie_title_fromtab= movie.getTitle();
 
 	}
-	
+
 
 	@FXML
 	void selectmovie_btn() {
@@ -252,7 +252,7 @@ public class Userpanelcontroller {
 		} 
 
 	}
-	
+
 
 	public void showSpinnerValue() {
 		spinner1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
@@ -280,8 +280,6 @@ public class Userpanelcontroller {
 
 
 
-
-
 	@FXML
 	void purchase_buybtn() {
 
@@ -289,12 +287,12 @@ public class Userpanelcontroller {
 		Timestamp bookedtime = new Timestamp(currentTimeMillis);
 
 		dbOperations.Bookticket(username, 
-								movieId_fromTab, 	
-								movie_title_fromtab, 
-								bookedtime, 
-								quantity1, 
-								quantity2, 
-								total);
+				movieId_fromTab, 	
+				movie_title_fromtab, 
+				bookedtime, 
+				quantity1, 
+				quantity2, 
+				total);
 
 
 	}
@@ -305,6 +303,7 @@ public class Userpanelcontroller {
 
 	}
 
+	//clearing the information
 	public void clearinfo() {
 		spinner1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
 		spinner2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
@@ -319,11 +318,13 @@ public class Userpanelcontroller {
 
 	}
 
-
+	//close button
 	public void close() {
 
 		System.exit(0);
 	}
+
+	// generating the receipt
 
 	public void receipt() {
 
@@ -349,7 +350,7 @@ public class Userpanelcontroller {
 
 
 
-
+	//signout method
 	@FXML
 	void signout_user() {
 
@@ -361,7 +362,7 @@ public class Userpanelcontroller {
 
 				Alert alert = new Alert(AlertType.CONFIRMATION, "Do you really want to sign out?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
-		
+
 				if (alert.getResult() == ButtonType.YES) {
 					// Perform sign out actions
 					window.hide(); // Close the window or perform other actions
